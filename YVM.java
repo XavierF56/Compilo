@@ -125,7 +125,7 @@ public class YVM implements YakaConstants{
 	   Ecriture.ecrireString(file, "queue\n");
    }
    
-   /* Catégories d'operateurs */
+   /* Categories d'operateurs */
    
 	public void opNeg(){
 		int op = stop.pop();
