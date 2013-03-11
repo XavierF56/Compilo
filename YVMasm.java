@@ -1,0 +1,233 @@
+
+public class YVMasm extends YVM {
+
+	private static int nbMess = 0;
+	
+	@Override
+	public void ecrire(String string) {
+		// TODO Auto-generated method stub
+		super.ecrire(string);
+	}
+
+	@Override
+	public void iadd() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.iadd();
+		Ecriture.ecrireString(file,"pop bx \npop ax \nadd ax,bx\npush ax\n");
+	}
+
+	@Override
+	public void isub() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.isub();
+		Ecriture.ecrireString(file,"pop bx \npop ax \nsub ax,bx\npush ax\n");
+	}
+
+	@Override
+	public void imul() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.imul();
+		Ecriture.ecrireString(file,"pop bx \npop ax \nimul bx\npush ax\n");
+	}
+
+	@Override
+	public void idiv() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.idiv();
+		Ecriture.ecrireString(file,"pop bx \npop ax \ncwd \nidiv bx \npush ax\n");
+	}
+
+	@Override
+	public void inot() {
+		Ecriture.ecrireString(file,"\n\n");
+		Ecriture.ecrireString(file,"pop ax \n xor ax,-1 \n push ax\n");
+		//----------------------------------------------------------------------> ERREUR ???
+	}
+
+	@Override
+	public void ineg() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.ineg();
+		Ecriture.ecrireString(file,"pop bx \nmov ax,0 \nsub ax,bx\npush ax\n");
+	}
+
+	@Override
+	public void ior() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.ior();
+		Ecriture.ecrireString(file,"pop bx \npop ax \nor ax,bx\npush ax\n");
+	}
+
+	@Override
+	public void iand() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.iand();
+		Ecriture.ecrireString(file,"pop bx \npop ax \nand ax,bx\npush ax\n");
+	}
+
+	@Override
+	public void iinf() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.iinf();
+		Ecriture.ecrireString(file,"pop bx \npop ax \ncmp ax,bx \njge $+6 \npush -1 \njmp $+4 \npush 0 \n");
+	}
+
+	@Override
+	public void isup() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.isup();
+		Ecriture.ecrireString(file,"pop bx \npop ax \ncmp ax,bx \njle $+6 \npush -1 \njmp $+4 \npush 0 \n");
+	}
+
+	@Override
+	public void iinfegal() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.iinfegal();
+		Ecriture.ecrireString(file,"pop bx \npop ax \ncmp ax,bx \njg $+6 \npush -1 \njmp $+4 \npush 0 \n");
+	}
+
+	@Override
+	public void isupegal() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.isupegal();
+		Ecriture.ecrireString(file,"pop bx \npop ax \ncmp ax,bx \njl $+6 \npush -1 \njmp $+4 \npush 0 \n");
+	}
+
+	@Override
+	public void iegal() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.iegal();
+		Ecriture.ecrireString(file,"pop bx \npop ax \ncmp ax,bx \njne $+6 \npush -1 \njmp $+4 \npush 0 \n");
+	}
+
+	@Override
+	public void idiff() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.idiff();
+		Ecriture.ecrireString(file,"pop bx \npop ax \ncmp ax,bx \nje $+6 \npush -1 \njmp $+4 \npush 0 \n");
+	}
+
+	@Override
+	public void iload(int offset) {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.iload(offset);
+		Ecriture.ecrireString(file,"push word ptr [bp" + offset +"]\n");
+	}
+
+	@Override
+	public void istore(int offset) {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.istore(offset);
+		Ecriture.ecrireString(file,"pop ax \nmov word ptr [bp" + offset + "], ax\n");
+}
+
+	@Override
+	public void iconst(int offset) {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.iconst(offset);
+		Ecriture.ecrireString(file,"push word ptr " + offset + "\n");
+	}
+
+	@Override
+	public void ifeq(String etiq) {
+		//TODO LATER
+	}
+
+	@Override
+	public void goTo(String etiq) {
+		// TODO LATER
+	}
+	
+	public void entete() {
+		Ecriture.ecrireString(file,";");
+		super.entete();
+		Ecriture.ecrireString(file,"extrn lirent:proc, ecrent:proc\nextrn ecrbool:proc\nextrn ecrch:proc, ligsuiv:proc\n");
+		Ecriture.ecrireString(file,".model SMALL\n.586\n\n.CODE\ndebut:\nSTARTUPCODE\n\n");
+	}
+	
+	@Override
+	public void ouvrePrinc(int nb) {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.ouvrePrinc(nb);
+		Ecriture.ecrireString(file,"mov bp,sp\nsub sp,"+nb+"\n");
+	}
+
+	@Override
+	public void ecrireEnt() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.ecrireEnt();
+		Ecriture.ecrireString(file,"call ecrent\n");
+	}
+
+	@Override
+	public void ecrireChaine(String chaine) {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.ecrireChaine(chaine);
+		Ecriture.ecrireString(file,".DATA\nmess"+nbMess+ " DB "+chaine.substring(0, chaine.length()-1) +"$\"\n");
+		Ecriture.ecrireString(file,".CODE\nlea dx, mess"+nbMess+"\npush dx\ncall ecrch\n");
+		nbMess++;
+	}
+
+	@Override
+	public void ecrireBool() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.ecrireBool();
+		Ecriture.ecrireString(file,"call ecrbool\n");
+	}
+
+	@Override
+	public void lireEnt(int offset) {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.lireEnt(offset);
+		Ecriture.ecrireString(file,"lea dx,[bp"+offset+"]\npush dx\ncall lirent\n");
+	}
+
+	@Override
+	public void aLaLigne() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.aLaLigne();
+		Ecriture.ecrireString(file,"call ligsuiv\n");
+	}
+	
+	public void queue(){
+			Ecriture.ecrireString(file,"\n\n;");
+			super.queue();
+		   Ecriture.ecrireString(file, "nop\nEXITCODE\nEnd debut\n");
+	   }
+
+	@Override
+	public void opNeg() {
+		// TODO Auto-generated method stub
+		super.opNeg();
+	}
+
+	@Override
+	public void opMul() {
+		// TODO Auto-generated method stub
+		super.opMul();
+	}
+
+	@Override
+	public void opAdd() {
+		// TODO Auto-generated method stub
+		super.opAdd();
+	}
+
+	@Override
+	public void opRel() {
+		// TODO Auto-generated method stub
+		super.opRel();
+	}
+
+	@Override
+	public void push(int i) {
+		// TODO Auto-generated method stub
+		super.push(i);
+	}
+
+	public YVMasm(String nomFichier) {
+		super(nomFichier);
+		// TODO Auto-generated constructor stub
+	}
+
+}
