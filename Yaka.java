@@ -6,6 +6,7 @@ public class Yaka implements YakaConstants {
         public static String fichier;
         public static YVM yvm ;
         public static int ligne = 1;
+        public static boolean erreur = false;
 
 
   public static void main(String args[]) {
@@ -13,7 +14,7 @@ public class Yaka implements YakaConstants {
     java.io.InputStream input;
 
     if (args.length==1) {
-      System.out.print(args[args.length-1] + ": ");
+      //System.out.print(args[args.length-1] + ": ");
       try {
         input = new java.io.FileInputStream(args[args.length-1]+".yaka");
         fichier = args[args.length-1];
@@ -32,7 +33,7 @@ public class Yaka implements YakaConstants {
     try {
       analyseur = new Yaka(input);
       analyseur.analyse();
-      System.out.println("analyse syntaxique terminee!");
+      //System.out.println("analyse syntaxique terminee!");
     } catch (ParseException e) {
       String msg = e.getMessage();
       msg = msg.substring(0,msg.indexOf("\u005cn"));

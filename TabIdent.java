@@ -15,6 +15,8 @@ public class TabIdent implements YakaConstants{
 		Ident id;
 		if (!this.existeIdent(clef)) {
 			id = new IdConst(ERREUR, 0);
+			System.out.println("-> ligne " + Yaka.ligne + " : ERREUR Variable non declaree");
+			Yaka.erreur = true;
 		} else {
 			id = table.get(clef); 
 		}
@@ -26,6 +28,10 @@ public class TabIdent implements YakaConstants{
 	}
 	public void rangeIdent (String clef, Ident id)
 	{
+		if (this.existeIdent(clef)) {
+			System.out.println("-> ligne " + Yaka.ligne + " : ERREUR Nom de variable deja declaree");
+			Yaka.erreur = true;
+		}
 		table.put(clef,id);
 	}
 	

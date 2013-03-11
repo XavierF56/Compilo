@@ -5,7 +5,7 @@ public class Expression implements YakaConstants {
 	private Stack<Integer> pileOperandes;
 	private Stack<Integer> pileOperateurs ;
 	private int affectation = 0;
-	int affoff = 0;
+	int offsetAffectation = 0;
 	
 	public Expression(){
 		pileOperandes = new Stack<Integer>();
@@ -15,18 +15,19 @@ public class Expression implements YakaConstants {
 	
 	public boolean controleType(){
 		int a,b, op = 0;
-		System.out.println(pileOperandes);
+		//System.out.println(pileOperandes);
 		//System.out.println(pileOperateurs);
 
-		//1ere cas : fin
-		if((pileOperandes.size() == 1) && (pileOperateurs.size() == 0)) {
+		//1ere cas : fin -> devenu useless avec les affectations
+		/*if((pileOperandes.size() == 1) && (pileOperateurs.size() == 0)) {
 			a = pileOperandes.pop();
 			if (a == ERREUR){
-				System.out.println("ERREUR d'evaluation de l'expression / ligne : " + Yaka.ligne);
+				System.out.println("-> ligne " + Yaka.ligne + " : ERREUR d'evaluation de l'expression");
+				Yaka.erreur = true;
 				return false;
 				}
 			else return true ;
-		}
+		}*/
 
 		//3eme cas autres operation
 		b = pileOperandes.pop();
@@ -140,17 +141,16 @@ public class Expression implements YakaConstants {
 	
 	public void clotureExpression(){
 		int last = pileOperandes.pop();
-		//System.out.println("affoff = " + affoff);
 
 		if (last == ERREUR){
-			System.out.println("================---> ERREUR d'evaluation de l'expression lors de laffectation / ligne : " + Yaka.ligne);
-		} else if (affoff == 2) {
-			System.out.println("================---> ERREUR nest pas une variable / ligne : " + Yaka.ligne);
+			System.out.println("-> ligne " + Yaka.ligne + " : ERREUR expresion incorrect");
+			Yaka.erreur = true;
 		}else if (affectation > 0) {
 			if(!(affectation == last)){
-				System.out.println("================---> ERREUR d'affectation de l'expression / ligne : " + Yaka.ligne);
+				System.out.println("-> ligne " + Yaka.ligne + " : ERREUR lors de l'affectation");
+				Yaka.erreur = true;
 			}else{
-				Yaka.yvm.istore(affoff);
+				Yaka.yvm.istore(offsetAffectation);
 			}
 		} else {
 			if (last == BOOLEEN) Yaka.yvm.ecrireBool();
@@ -159,12 +159,12 @@ public class Expression implements YakaConstants {
 		}
 		
 		affectation = 0;
-		affoff = 4;
+		offsetAffectation = 4;
 	}
 	
 	public void setAffectation(int a){affectation = a;}
 	
-	public void setAffOff(int a){affoff = a;}
+	public void setAffOff(int a){offsetAffectation = a;}
 	
 	
 	

@@ -2,12 +2,17 @@
  *
  *       Auteur: Pedrono Marie-Jo
  *
- * 	cr�ation : 13 f�vrier 2002
+ * 	creation : 13 fevrier 2002
  *
  *     nature : projet etudiant
  *
  */
 
+/* TODO
+	BUG : Lorsqu'une erreur est detectee, le fichier est cree => le fichier ne doit pas etre cree
+	BUG : Lorsqu'une variable n'est pas declaree => on a 2 fois le massage d'erreur
+	BUG : lorsqu'une variable n'a jamais ete affectee => devrait envoyer un message d'erreur
+*/
 
 options{
 	JDK_VERSION="1.5";	
@@ -24,6 +29,7 @@ public class Yaka{
 	public static String fichier;
 	public static YVM yvm ;
 	public static int ligne = 1;
+	public static boolean erreur = false;
 
 
   public static void main(String args[]) { 
@@ -31,7 +37,7 @@ public class Yaka{
     java.io.InputStream input;
 
     if (args.length==1) {
-      System.out.print(args[args.length-1] + ": ");
+      //System.out.print(args[args.length-1] + ": ");
       try {
         input = new java.io.FileInputStream(args[args.length-1]+".yaka");
         fichier = args[args.length-1];
@@ -50,7 +56,8 @@ public class Yaka{
     try {
       analyseur = new Yaka(input);
       analyseur.analyse();
-      System.out.println("analyse syntaxique terminee!");
+      if (erreur) {}
+      //System.out.println("analyse syntaxique terminee!");
     } catch (ParseException e) {
       String msg = e.getMessage();
       msg = msg.substring(0,msg.indexOf("\n"));
@@ -131,7 +138,6 @@ TOKEN :
 | <DIFFERENT : "DIFFERENT">
 | <ERREUR : "ERREUR">
 | <NEG : "NEG">
-
 }
 
 

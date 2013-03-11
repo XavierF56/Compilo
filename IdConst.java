@@ -20,6 +20,7 @@ public class IdConst extends Ident {
 	}
 	
 	public int getOffset (){
+		System.out.println("-> ligne " + Yaka.ligne + " : ERREUR Une constante ne peut pas etre redefinie");
 		return 2;	
 	}
 	
