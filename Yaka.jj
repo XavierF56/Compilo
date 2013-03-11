@@ -2,7 +2,7 @@
  *
  *       Auteur: Pedrono Marie-Jo
  *
- * 	création : 13 février 2002
+ * 	crï¿½ation : 13 fï¿½vrier 2002
  *
  *     nature : projet etudiant
  *
@@ -21,7 +21,8 @@ public class Yaka{
 	public static Declaration declaration = new Declaration();
 	public static TabIdent tabIdent = new TabIdent();
 	public static Expression expression = new Expression();
-	public static YVM yvm = new YVMasm("instr.asm");
+	public static String fichier;
+	public static YVM yvm ;
 	public static int ligne = 1;
 
 
@@ -33,6 +34,8 @@ public class Yaka{
       System.out.print(args[args.length-1] + ": ");
       try {
         input = new java.io.FileInputStream(args[args.length-1]+".yaka");
+        fichier = args[args.length-1];
+      	yvm = new YVMasm(fichier + ".asm");
       } catch (java.io.FileNotFoundException e) {
         System.out.println("Fichier introuvable.");
         return;
@@ -85,7 +88,7 @@ SKIP :
 }
 
 
-/* Mots réservés*/
+/* Mots rï¿½servï¿½s*/
 
 TOKEN :
 {

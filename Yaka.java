@@ -3,7 +3,8 @@ public class Yaka implements YakaConstants {
         public static Declaration declaration = new Declaration();
         public static TabIdent tabIdent = new TabIdent();
         public static Expression expression = new Expression();
-        public static YVM yvm = new YVMasm("instr.asm");
+        public static String fichier;
+        public static YVM yvm ;
         public static int ligne = 1;
 
 
@@ -15,6 +16,8 @@ public class Yaka implements YakaConstants {
       System.out.print(args[args.length-1] + ": ");
       try {
         input = new java.io.FileInputStream(args[args.length-1]+".yaka");
+        fichier = args[args.length-1];
+        yvm = new YVMasm(fichier + ".asm");
       } catch (java.io.FileNotFoundException e) {
         System.out.println("Fichier introuvable.");
         return;
