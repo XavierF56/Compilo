@@ -1,17 +1,16 @@
 /*
  *
- *       Auteur: Pedrono Marie-Jo
+ *      Auteur: Pedrono Marie-Jo
  *
- * 	creation : 13 fevrier 2002
+ * 		creation : 13 fevrier 2002
  *
- *     nature : projet etudiant
+ *      nature : projet etudiant
  *
  */
 
 /* TODO
 	BUG : Lorsqu'une erreur est detectee, le fichier est cree => le fichier ne doit pas etre cree
-	BUG : Lorsqu'une variable n'est pas declaree => on a 2 fois le massage d'erreur
-	BUG : lorsqu'une variable n'a jamais ete affectee => devrait envoyer un message d'erreur
+	Verifier si expr5 marche bien
 */
 
 options{
@@ -95,7 +94,7 @@ SKIP :
 }
 
 
-/* Mots r�serv�s*/
+/* Mots reserves*/
 
 TOKEN :
 {
@@ -173,7 +172,7 @@ void analyse() : {}
 void bloc() : {}{
  (declConst())*
  (declVar())*		
- {yvm.ouvrePrinc(- IdVar.getLastOffset());} suiteInstr() 
+ {yvm.ouvrePrinc(- IdVar.getPrinc());} suiteInstr() 
 }
 
 void declConst() : {}
@@ -240,8 +239,13 @@ void instruction() :{}
 
 void affectation() :{}
 {
-	<ident>{expression.setAffectation(tabIdent.chercheIdent(YakaTokenManager.identLu).getType());
-		expression.setAffOff((tabIdent.chercheIdent(YakaTokenManager.identLu)).getOffset());}
+	<ident>
+	{
+		Ident id = tabIdent.chercheIdent(YakaTokenManager.identLu);
+		id.setAffecte(true);
+		expression.setTypeAffectation(id.getType());
+		expression.setOffsetAffectation(id.getOffset());
+	}
 	"=" expression() {expression.clotureExpression();}
 }
 
@@ -268,7 +272,7 @@ void expression() : {}
   simpleExpr() 
   (opRel() 
   simpleExpr() 
-  {expression.controleType(); /*expression.controleType(); y reflechir*/ yvm.opRel();})?
+  {expression.controleType(); yvm.opRel();})?
 }
 
 

@@ -33,6 +33,7 @@ public class Yaka implements YakaConstants {
     try {
       analyseur = new Yaka(input);
       analyseur.analyse();
+      if (erreur) {}
       //System.out.println("analyse syntaxique terminee!");
     } catch (ParseException e) {
       String msg = e.getMessage();
@@ -78,7 +79,7 @@ public class Yaka implements YakaConstants {
       }
       declVar();
     }
-  yvm.ouvrePrinc(- IdVar.getLastOffset());
+  yvm.ouvrePrinc(- IdVar.getPrinc());
     suiteInstr();
   }
 
@@ -224,8 +225,10 @@ public class Yaka implements YakaConstants {
 
   static final public void affectation() throws ParseException {
     jj_consume_token(ident);
-                expression.setAffectation(tabIdent.chercheIdent(YakaTokenManager.identLu).getType());
-                expression.setAffOff((tabIdent.chercheIdent(YakaTokenManager.identLu)).getOffset());
+                Ident id = tabIdent.chercheIdent(YakaTokenManager.identLu);
+                id.setAffecte(true);
+                expression.setTypeAffectation(id.getType());
+                expression.setOffsetAffectation(id.getOffset());
     jj_consume_token(54);
     expression();
                           expression.clotureExpression();
@@ -291,7 +294,7 @@ public class Yaka implements YakaConstants {
     case 61:
       opRel();
       simpleExpr();
-   expression.controleType(); /*expression.controleType(); y reflechir*/ yvm.opRel();
+   expression.controleType(); yvm.opRel();
       break;
     default:
       jj_la1[11] = jj_gen;

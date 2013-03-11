@@ -1,29 +1,33 @@
 public class IdVar extends Ident {
 	private int offset;
-	private static int last_offset;
+	private static int prochain_offset;
+	private boolean affecte;
 	
 	public IdVar (int t){
 		super();
 		super.type = t;
-		last_offset -= 2;
-		offset = last_offset;
+		prochain_offset -= 2;
+		offset = prochain_offset;
+		affecte = false;
 	}
 	
-	public int getOffset() {
-		return offset;
-	}
-
-	public void setOffset (int o){
-		offset = o;
+	public void setAffecte(boolean affecte) {
+		this.affecte = affecte;
 	}
 	
-	public void setType(int type) {
-		super.type = type;
-	}
+	/**
+	 * Methode utilise pour afficher ouvrePrinc
+	 * @return
+	 */
+	public static int getPrinc(){return prochain_offset;}
 	
-	public static int getLastOffset(){return last_offset;}
-	
+	/**
+	 * Methode d'appel a la fonction iload de YVM
+	 */
 	public void yvm() {
+		if (!affecte) {
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : une des variables utilisée dans l'expression n'a pas ete initialisee");
+		}
 		Yaka.yvm.iload(offset);
 	}
 	

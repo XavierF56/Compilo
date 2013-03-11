@@ -1,9 +1,7 @@
 public class IdConst extends Ident {
 	protected int val;
 
-	public int getVal() {
-		return val;
-	}	
+	
 	
 	public IdConst (int t, int v){
 		super();
@@ -11,17 +9,22 @@ public class IdConst extends Ident {
 		type = t;
 	}
 
-	public String toString() {
-		return "( type : " + type + " ; val : " + val + ")";
-	}
+	public int getVal() {
+		return val;
+	}	
 	
+	/**
+	 * Methode d'appel a la fonction iconst de YVM
+	 */
 	public void yvm() {
 		Yaka.yvm.iconst(val);
 	}
 	
-	public int getOffset (){
-		System.out.println("-> ligne " + Yaka.ligne + " : ERREUR Une constante ne peut pas etre redefinie");
-		return 2;	
+	public String toString() {
+		return "( type : " + type + " ; val : " + val + ")";
 	}
 	
+	public void setAffecte(boolean affecte) {
+		System.out.println("ERREUR ligne " + Yaka.ligne + " : '" + YakaTokenManager.identLu + "' n'est pas une variable");
+	}
 }

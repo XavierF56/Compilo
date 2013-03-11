@@ -4,8 +4,8 @@ import java.util.Stack;
 public class Expression implements YakaConstants {
 	private Stack<Integer> pileOperandes;
 	private Stack<Integer> pileOperateurs ;
-	private int affectation = 0;
-	int offsetAffectation = 0;
+	private int typeAffectation = 0;
+	private int offsetAffectation = 0;
 	
 	public Expression(){
 		pileOperandes = new Stack<Integer>();
@@ -18,18 +18,6 @@ public class Expression implements YakaConstants {
 		//System.out.println(pileOperandes);
 		//System.out.println(pileOperateurs);
 
-		//1ere cas : fin -> devenu useless avec les affectations
-		/*if((pileOperandes.size() == 1) && (pileOperateurs.size() == 0)) {
-			a = pileOperandes.pop();
-			if (a == ERREUR){
-				System.out.println("-> ligne " + Yaka.ligne + " : ERREUR d'evaluation de l'expression");
-				Yaka.erreur = true;
-				return false;
-				}
-			else return true ;
-		}*/
-
-		//3eme cas autres operation
 		b = pileOperandes.pop();
 		op = pileOperateurs.pop();
 		a = pileOperandes.pop();
@@ -143,11 +131,11 @@ public class Expression implements YakaConstants {
 		int last = pileOperandes.pop();
 
 		if (last == ERREUR){
-			System.out.println("-> ligne " + Yaka.ligne + " : ERREUR expresion incorrect");
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : expresion incorrect");
 			Yaka.erreur = true;
-		}else if (affectation > 0) {
-			if(!(affectation == last)){
-				System.out.println("-> ligne " + Yaka.ligne + " : ERREUR lors de l'affectation");
+		}else if (typeAffectation > 0) {
+			if(!(typeAffectation == last)){
+				System.out.println("ERREUR ligne " + Yaka.ligne + " : lors de l'affectation");
 				Yaka.erreur = true;
 			}else{
 				Yaka.yvm.istore(offsetAffectation);
@@ -158,13 +146,13 @@ public class Expression implements YakaConstants {
 			else{}
 		}
 		
-		affectation = 0;
+		typeAffectation = 0;
 		offsetAffectation = 4;
 	}
 	
-	public void setAffectation(int a){affectation = a;}
+	public void setTypeAffectation(int a){typeAffectation = a;}
 	
-	public void setAffOff(int a){offsetAffectation = a;}
+	public void setOffsetAffectation(int a){offsetAffectation = a;}
 	
 	
 	
