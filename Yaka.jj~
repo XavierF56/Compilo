@@ -255,10 +255,7 @@ void affectation() :{}
 void lecture() :{}
 {
 	<LIRE>"("<ident>")"
-	{
-		((IdVar)tabIdent.chercheIdent(YakaTokenManager.identLu)).setAffecte(true);
-		yvm.lireEnt(((IdVar)tabIdent.chercheIdent(YakaTokenManager.identLu)).getOffset());
-	}
+	{yvm.lireEnt(((IdVar)tabIdent.chercheIdent(YakaTokenManager.identLu)).getOffset());}
 }
 
 void ecriture() :{}
