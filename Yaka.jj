@@ -137,12 +137,6 @@ TOKEN :
 | <DIFFERENT : "DIFFERENT">
 | <ERREUR : "ERREUR">
 | <NEG : "NEG">
-| <TANTQUE : "TANTQUE">
-| <FAIRE : "FAIRE">
-| <SI : "SI">
-| <SINON : "SINON">
-| <FSI : "FSI">
-| <ALORS : "ALORS">
 }
 
 
