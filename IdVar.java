@@ -1,5 +1,4 @@
 public class IdVar extends Ident {
-	private int offset;
 	private static int prochain_offset;
 	private boolean affecte;
 	
@@ -7,7 +6,7 @@ public class IdVar extends Ident {
 		super();
 		super.type = t;
 		prochain_offset -= 2;
-		offset = prochain_offset;
+		super.offset = prochain_offset;
 		affecte = false;
 	}
 	
@@ -26,7 +25,7 @@ public class IdVar extends Ident {
 	 */
 	public void yvm() {
 		if (!affecte) {
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : une des variables utilisée dans l'expression n'a pas ete initialisee");
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : une des variables utilisee dans l'expression n'a pas ete initialisee");
 		}
 		Yaka.yvm.iload(offset);
 	}

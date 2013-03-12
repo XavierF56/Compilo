@@ -1,5 +1,5 @@
 public class Ident {
-	private int offset = 2;
+	protected int offset = 0;
 	protected int type;
 	
 	public int getType() {

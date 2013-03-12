@@ -239,7 +239,8 @@ public class Yaka implements YakaConstants {
     jj_consume_token(55);
     jj_consume_token(ident);
     jj_consume_token(56);
-         yvm.lireEnt(((IdVar)tabIdent.chercheIdent(YakaTokenManager.identLu)).getOffset());
+                ((IdVar)tabIdent.chercheIdent(YakaTokenManager.identLu)).setAffecte(true);
+                yvm.lireEnt(((IdVar)tabIdent.chercheIdent(YakaTokenManager.identLu)).getOffset());
   }
 
   static final public void ecriture() throws ParseException {

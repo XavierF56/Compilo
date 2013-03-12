@@ -5,6 +5,7 @@ public class YVM implements YakaConstants{
    
    OutputStream file;
    private Stack<Integer> stop = new Stack<Integer>();
+   protected static int index = 1; 
 
    
    public YVM (String nomFichier){
@@ -189,6 +190,21 @@ public class YVM implements YakaConstants{
 
 	public void push(int i){
 		stop.push(i);
+	}
+	
+	/* Iteration */
+	public void tantQue() {
+		Ecriture.ecrireString(file, "FAIRE"+index+":\n");
+	}
+	public void faire() {
+		Ecriture.ecrireString(file, "iffaux FAIT"+index+"\n");
+	}
+	public void goTo() {
+		 Ecriture.ecrireString(file, "goto FAIRE"+index+"\n");
+	}
+	public void fait() {
+		 Ecriture.ecrireString(file, "FAIT"+index+":\n");
+		 index++;
 	}
 
 	
