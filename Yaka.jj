@@ -139,6 +139,10 @@ TOKEN :
 | <NEG : "NEG">
 | <TANTQUE : "TANTQUE">
 | <FAIRE : "FAIRE">
+| <SI : "SI">
+| <SINON : "SINON">
+| <FSI : "FSI">
+| <ALORS : "ALORS">
 }
 
 
@@ -238,6 +242,7 @@ void instruction() :{}
   | lecture()
   | ecriture()
   | iteration()
+  | conditionnelle()
 }
 
 void affectation() :{}
@@ -328,6 +333,7 @@ void opRel() : {}
  | ">=" {expression.empiler(SUPOUEG); yvm.push(SUPOUEG);}
 } 
 
+
 void opAdd() : {}
 {
     "+"	 {expression.empiler(PLUS); yvm.push(PLUS);}
@@ -351,6 +357,12 @@ void iteration() : {}
 {
 	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();}<FAIRE> (instruction())* {yvm.goTo(); yvm.fait();}	
 }
+
+void conditionnelle() : {}
+{
+	<SI> expression() <ALORS> (instruction())* (<SINON> (instruction())* )?	<FSI>
+}
+
 
 
 
