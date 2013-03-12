@@ -150,6 +150,14 @@ public class Expression implements YakaConstants {
 		offsetAffectation = 4;
 	}
 	
+	public void retourneBooleen() {
+		int last = pileOperandes.pop();
+		if ( last != BOOLEEN ) {
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : il faut une expression booleene");
+	
+		}
+	}
+	
 	public void setTypeAffectation(int a){typeAffectation = a;}
 	
 	public void setOffsetAffectation(int a){offsetAffectation = a;}

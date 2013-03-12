@@ -230,7 +230,7 @@ public class YVMasm extends YVM {
 		// TODO Auto-generated constructor stub
 	}
 	
-		/* Iteration */
+	/* Iteration */
 	public void tantQue() {
 		Ecriture.ecrireString(file,"\n\n;");
 		super.tantQue();
