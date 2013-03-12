@@ -349,7 +349,7 @@ void opNeg() : {}
 
 void iteration() : {}
 {
-	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();}<FAIRE> (instruction())* {yvm.goTo(); yvm.fait();}	
+	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();}<FAIRE> (instruction()";")* {yvm.goTo(); yvm.fait();} <FAIT> ";"
 }
 
 void conditionnelle() : {}

@@ -46,68 +46,51 @@ call ecrent
 call ligsuiv
 
 
-;ecrireChaine "-45="
-.DATA
-mess1 DB "-45=$"
-.CODE
-lea dx, mess1
-push dx
-call ecrch
-
-
-;iconst 2
-push word ptr 2
-
-
-;ineg
-pop bx 
-mov ax,0 
-sub ax,bx
-push ax
+FAIRE1:
 
 
 ;iload -2
 push word ptr [bp-2]
 
 
-;imul
+;iconst 10
+push word ptr 10
+
+
+;iinfegal
 pop bx 
 pop ax 
-imul bx
-push ax
+cmp ax,bx 
+jg $+6 
+push -1 
+jmp $+4 
+push 0 
 
 
-;iconst 3
-push word ptr 3
+;iffaux FAIT1
+pop ax
+cmp ax,0
+je FAIT1
 
 
-;ineg
-pop bx 
-mov ax,0 
-sub ax,bx
-push ax
+;iload -2
+push word ptr [bp-2]
 
 
-;iconst 4
-push word ptr 4
+;ecrireEnt
+call ecrent
 
 
-;imul
-pop bx 
-pop ax 
-imul bx
-push ax
+;aLaLigne
+call ligsuiv
 
 
-;iconst 2
-push word ptr 2
+;iload -2
+push word ptr [bp-2]
 
 
-;imul
-pop bx 
-pop ax 
-imul bx
-push ax
+;iconst 1
+push word ptr 1
 
 
 ;iadd
@@ -117,23 +100,16 @@ add ax,bx
 push ax
 
 
-;iconst 5
-push word ptr 5
-
-
-;isub
-pop bx 
+;istore -2
 pop ax 
-sub ax,bx
-push ax
+mov word ptr [bp-2], ax
 
 
-;ecrireEnt
-call ecrent
+;goto FAIRE1
+jmp FAIRE1
 
 
-;aLaLigne
-call ligsuiv
+FAIT1:
 
 
 ;queue

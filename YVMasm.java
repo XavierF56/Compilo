@@ -232,14 +232,13 @@ public class YVMasm extends YVM {
 	
 	/* Iteration */
 	public void tantQue() {
-		Ecriture.ecrireString(file,"\n\n;");
-		super.tantQue();
+		Ecriture.ecrireString(file,"\n\n");
 		Ecriture.ecrireString(file, "FAIRE"+index+":\n");
 	}
 	public void faire() {
 		Ecriture.ecrireString(file,"\n\n;");
 		super.faire();
-		Ecriture.ecrireString(file, "pop ax\ncmpax,0\nje FAIT" +super.index + "\n");
+		Ecriture.ecrireString(file, "pop ax\ncmp ax,0\nje FAIT" +super.index + "\n");
 	}
 	public void goTo() {
 		Ecriture.ecrireString(file,"\n\n;");
@@ -247,8 +246,7 @@ public class YVMasm extends YVM {
 		Ecriture.ecrireString(file, "jmp FAIRE"+index+"\n");
 	}
 	public void fait() {
-		Ecriture.ecrireString(file,"\n\n;");
-		super.fait();
+		Ecriture.ecrireString(file,"\n\n");
 		Ecriture.ecrireString(file, "FAIT"+index+":\n");
 	}
 
