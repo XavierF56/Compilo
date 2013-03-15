@@ -250,4 +250,26 @@ public class YVMasm extends YVM {
 		Ecriture.ecrireString(file, "FAIT"+index+":\n");
 	}
 
+	/* Conditionnelle */
+	public void alors() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.alors();
+		Ecriture.ecrireString(file, "pop ax\ncmp ax,0\nje SINON"+indexCondi+"\n");
+	}
+	
+	public void goToCond() {
+		Ecriture.ecrireString(file,"\n\n;");
+		super.goToCond();
+		Ecriture.ecrireString(file, "jmp FSI"+indexCondi+"\n");
+	}
+	
+	public void sinon() {
+		Ecriture.ecrireString(file,"\n\n");
+		Ecriture.ecrireString(file, "SINON"+indexCondi+":\n");
+	}
+	
+	public void fsi() {
+		Ecriture.ecrireString(file,"\n\n");
+		Ecriture.ecrireString(file, "FSI"+indexCondi+":\n");
+	}
 }

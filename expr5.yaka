@@ -11,5 +11,16 @@ VAR ENTIER c1,c2;
 		ALALIGNE;
 		c1=c1+1;
 	FAIT;
+	
+	ECRIRE(c1 >= 9);
+	SI
+	c1 >= 9
+	ALORS
+	c1 = 100;
+	SINON
+	FSI;
+		
+	ECRIRE(c1);
+	ALALIGNE;
 
 FPROGRAMME

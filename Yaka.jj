@@ -232,7 +232,7 @@ void suiteInstr() :{}
 
 void instruction() :{}
 {
-	affectation()
+    affectation()
   | lecture()
   | ecriture()
   | iteration()
@@ -349,12 +349,12 @@ void opNeg() : {}
 
 void iteration() : {}
 {
-	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();}<FAIRE> (instruction()";")* {yvm.goTo(); yvm.fait();} <FAIT> ";"
+	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();}<FAIRE> (instruction()";")* {yvm.goTo(); yvm.fait();} <FAIT>
 }
 
 void conditionnelle() : {}
 {
-	<SI> expression() <ALORS> (instruction())* (<SINON> (instruction())* )?	<FSI>
+	<SI> expression() {yvm.alors();}<ALORS> (instruction() ";")* {yvm.goToCond();yvm.sinon();}<SINON> (instruction() ";")* {yvm.fsi();}<FSI>
 }
 
 

@@ -6,6 +6,7 @@ public class YVM implements YakaConstants{
    OutputStream file;
    private Stack<Integer> stop = new Stack<Integer>();
    protected static int index = 1; 
+   protected static int indexCondi = 1;
 
    
    public YVM (String nomFichier){
@@ -206,6 +207,27 @@ public class YVM implements YakaConstants{
 		 Ecriture.ecrireString(file, "FAIT"+index+":\n");
 		 index++;
 	}
+	
+	/* Conditionnelle */
+	public void alors() {
+		Ecriture.ecrireString(file, "iffaux SINON"+indexCondi+"\n");
+	}
+	
+	public void goToCond() {
+		Ecriture.ecrireString(file, "goto FSI"+indexCondi+"\n");
+	}
+	
+	public void sinon() {
+		Ecriture.ecrireString(file, "SINON"+indexCondi+":\n");
+	}
+	
+	public void fsi() {
+		Ecriture.ecrireString(file, "FSI"+indexCondi+":\n");
+		indexCondi++;
+	}
+
+
+
 
 	
 }

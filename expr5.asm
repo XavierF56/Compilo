@@ -112,6 +112,83 @@ jmp FAIRE1
 FAIT1:
 
 
+;iload -2
+push word ptr [bp-2]
+
+
+;iconst 9
+push word ptr 9
+
+
+;isupegal
+pop bx 
+pop ax 
+cmp ax,bx 
+jl $+6 
+push -1 
+jmp $+4 
+push 0 
+
+
+;ecrireBool
+call ecrbool
+
+
+;iload -2
+push word ptr [bp-2]
+
+
+;iconst 9
+push word ptr 9
+
+
+;isupegal
+pop bx 
+pop ax 
+cmp ax,bx 
+jl $+6 
+push -1 
+jmp $+4 
+push 0 
+
+
+;iffaux SINON1
+pop ax
+cmp ax,0
+je SINON1
+
+
+;iconst 100
+push word ptr 100
+
+
+;istore -2
+pop ax 
+mov word ptr [bp-2], ax
+
+
+;goto FSI1
+jmp FSI1
+
+
+SINON1:
+
+
+FSI1:
+
+
+;iload -2
+push word ptr [bp-2]
+
+
+;ecrireEnt
+call ecrent
+
+
+;aLaLigne
+call ligsuiv
+
+
 ;queue
 nop
 EXITCODE
