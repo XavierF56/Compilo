@@ -271,5 +271,6 @@ public class YVMasm extends YVM {
 	public void fsi() {
 		Ecriture.ecrireString(file,"\n\n");
 		Ecriture.ecrireString(file, "FSI"+indexCondi+":\n");
+		indexCondi++;
 	}
 }

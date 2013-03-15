@@ -118,7 +118,7 @@ TOKEN :
 | <FONCTION : "FONCTION">
 | <FFONCTION  : "FFONCTION">
 | <PROGRAMME : "PROGRAMME" >
-| <FPROGRAMME: "FPROGRAMME" >
+| <FPROGRAMME : "FPROGRAMME" >
 | <PRINCIPAL : "PRINCIPAL">
 | <FPRINCIPAL : "FPRINCIPAL">
 | <ALORS : "ALORS">
@@ -164,10 +164,40 @@ TOKEN  :
 void analyse() : {}
 {
    <PROGRAMME> {yvm.entete();} <ident>	
-   bloc()
+   (declFonction() )* 
+   <PRINCIPAL> 
+   bloc() 
+   <FPRINCIPAL>
    {yvm.queue();}
    <FPROGRAMME> 
 }
+void declFonction() : {}
+{
+  type() <FONCTION> <ident> paramForms()
+  bloc()
+  <FFONCTION>
+}
+
+void paramForms() : {}
+{
+  "(" (paraForm() ("," paramForm())* )? ")"
+}
+
+void paramForm() : {}
+{
+  type() <ident>
+}
+
+void retourne() : {}
+{
+  <RETOURNE> expression()
+}
+
+void argumentsFonction() : {}
+{
+  "(" ( expression() ("," expression())* )? ")"
+
+
 
 void bloc() : {}{
  (declConst())*
@@ -237,6 +267,7 @@ void instruction() :{}
   | ecriture()
   | iteration()
   | conditionnelle()
+  | retourne()
 }
 
 void affectation() :{}
@@ -310,7 +341,8 @@ void primaire (): {}
 
 void valeur () : {}
 { <entier> {expression.empiler(ENTIER); yvm.iconst(YakaTokenManager.entierLu);}		
- | <ident> {expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
+ | <ident> (argumentsFonction())?
+ {expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
  tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();}
  | <VRAI>  {expression.empiler(VRAI); yvm.iconst(-1);}
  | <FAUX>  {expression.empiler(FAUX); yvm.iconst(0);}	
