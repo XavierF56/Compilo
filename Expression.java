@@ -147,7 +147,7 @@ public class Expression implements YakaConstants {
 		}
 		
 		typeAffectation = 0;
-		offsetAffectation = 4;
+		offsetAffectation = 0;
 	}
 	
 	public void retourneBooleen() {

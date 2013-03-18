@@ -6,14 +6,13 @@ public class TabIdent implements YakaConstants{
 
 	
 	public TabIdent(){
-		globaux = new HashMap<String,Ident>();
+		globaux = new HashMap<String,IdFonction>();
 		locaux = new HashMap<String,Ident>();
-
 	}
 	
-	/*Si Ident la clef n'est pas presente dans la Map on renvoit 
+	/**
+	 * Si Ident la clef n'est pas presente dans la Map on renvoit 
 	 * un ident ayant pour type erreur.
-	 *
 	 */
 	public Ident chercheIdent (String clef){
 		Ident id;
@@ -30,6 +29,7 @@ public class TabIdent implements YakaConstants{
 	public IdFonction chercheIdentGlob (String clef){
 		if (!globaux.containsKey(clef)) {
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : la fonction '" + clef + "' n'existe pas");
+			return null;
 		} else {
 			return globaux.get(clef); 
 		}
