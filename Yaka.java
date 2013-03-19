@@ -74,10 +74,10 @@ public class Yaka implements YakaConstants {
     jj_consume_token(FONCTION);
     jj_consume_token(ident);
     declaration.ajoutIdentFonc(YakaTokenManager.identLu);
-        declaration.setNomFonction(YakaTokenManager.identLu);
-        expression.setFonction();
+        expression.setFonction(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
     paramForms();
     bloc();
+   tabIdent.raz();
     jj_consume_token(FFONCTION);
   }
 

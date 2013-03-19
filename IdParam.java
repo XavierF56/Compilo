@@ -15,7 +15,7 @@ public class IdParam extends Ident{
 		this.affecte = affecte;
 	}
 	
-	public void raz(){prochain_offset = 0;}
+	public static void raz(){prochain_offset = 0;}
 	
 	public String toString() {
 		return "( Parametre : type : " + type + " ; offset : " + offset + ")";

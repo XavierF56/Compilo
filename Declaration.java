@@ -13,10 +13,6 @@ public class Declaration implements YakaConstants{
 		this.nom = nom;
 	}
 	
-	public void setNomFonction(String fonc){
-		this.nomFonction = fonc;
-	}
-	
 	public String getNomFonction(){
 		return this.nomFonction;
 	}
@@ -59,12 +55,14 @@ public class Declaration implements YakaConstants{
 	}
 	
 	void ajoutIdentFonc(String nom){
-		Yaka.tabIdent.rangeIdentGlob(nom, new IdFonction(type));
+		Yaka.tabIdent.rangeIdentGlob(nom, new IdFonction(type, nom));
+		nomFonction = nom;
 	}
 	
 	void ajoutIdentParam(String nom){
 		Yaka.tabIdent.chercheIdentGlob(nomFonction).addParam(type);
 		Yaka.tabIdent.rangeIdent(nom, new IdParam(type));
+		System.out.println(Yaka.tabIdent.toString());
 	}
 	
 	/*void ajoutIdent(){

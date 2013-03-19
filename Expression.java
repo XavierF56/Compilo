@@ -188,11 +188,11 @@ public class Expression implements YakaConstants {
 	}
 	public void testParam(){
 		int compteur = pileCompteurs.pop() + 1;
-		pileCompteur.push(compteur);
+		pileCompteurs.push(compteur);
 		int typeEnCours = pileOperandes.pop();
 		int typeParam = pileFonctions.peek().getParam(compteur-1);
 		if(typeEnCours != typeParam){
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : le type du parametre numéro " + compteur + " ne correspond pas à celui de la fonction" );
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : le type du parametre numï¿½ro " + compteur + " ne correspond pas ï¿½ celui de la fonction" );
 		}
 	}
 	

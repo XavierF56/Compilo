@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 
 public class IdFonction extends Ident implements YakaConstants{
-
+	private String nom = "";
 	private int resultat;
-	private ArrayList<Integer> parametre = new ArrayList();
+	private ArrayList<Integer> parametre = new ArrayList<Integer>();
 	
 
-	public IdFonction (int t){
+	public IdFonction (int type, String nom){
 		super();
-		super.type = t;
+		this.nom = nom;
+		this.resultat = type;
 	}
 	
 	public void setResultat (int res) {
@@ -29,7 +30,7 @@ public class IdFonction extends Ident implements YakaConstants{
 	
 	public int getParam(int index){
 		if (index > parametre.size()) {
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " +"?" + " est de " + parametre.size());
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " + nom + " est de " + parametre.size());
 			return ERREUR;
 		}
 		return parametre.get(index);
@@ -39,9 +40,11 @@ public class IdFonction extends Ident implements YakaConstants{
 		return parametre.size();
 	}
 	
+	public String getNom() {
+		return nom;
+	}
 
 	public String toString() {
-		return ("resultat : " + resultat + "les parametres : " + parametre);
+		return ("resultat : " + resultat + "/parametres : " + parametre);
 	}
-		
 }

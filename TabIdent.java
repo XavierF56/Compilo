@@ -37,9 +37,8 @@ public class TabIdent implements YakaConstants{
 	
 	public void rangeIdent (String clef, Ident id)
 	{
-		if (!locaux.containsKey(clef)) {
+		if (locaux.containsKey(clef)) {
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : l'element '" + clef + "' est deja declare");
-			Yaka.erreur = true;
 		} else {
 			locaux.put(clef,id);
 		}
@@ -47,9 +46,8 @@ public class TabIdent implements YakaConstants{
 	
 	public void rangeIdentGlob (String clef, IdFonction id)
 	{
-		if (!globaux.containsKey(clef)) {
+		if (globaux.containsKey(clef)) {
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : la fonction '" + clef + "' est deja declaree");
-			Yaka.erreur = true;
 		} else {
 			globaux.put(clef,id);
 		}
@@ -58,7 +56,13 @@ public class TabIdent implements YakaConstants{
 	
 	
 	public String toString() {
-		return "locaux : " + locaux.toString() + "\n\nGlobaux : " + globaux.toString();
+		return "locaux : " + locaux.toString() + "\nGlobaux : " + globaux.toString()+"\n";
+	}
+	
+	public void raz() {
+		locaux.clear();
+		IdParam.raz();
+		IdVar.raz();
 	}
 	
 }

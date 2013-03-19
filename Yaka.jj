@@ -177,11 +177,11 @@ void declFonction() : {}
   <ident>
   {
     declaration.ajoutIdentFonc(YakaTokenManager.identLu);
-  	declaration.setNomFonction(YakaTokenManager.identLu);
- 	expression.setFonction();
+ 	expression.setFonction(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
   }
   paramForms()
   bloc()
+  {tabIdent.raz();}
   <FFONCTION>
 }
 
