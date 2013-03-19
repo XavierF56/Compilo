@@ -18,8 +18,11 @@ public class IdVar extends Ident {
 	 * Methode utilise pour afficher ouvrePrinc
 	 * @return
 	 */
-	public static int getPrinc(){return prochain_offset;}
+	public static int getPrinc(){return  prochain_offset;}
 	
+	public static void raz(){prochain_offset = 0;}
+	
+	public static int getNbVarL(){return  -prochain_offset;}
 	/**
 	 * Methode d'appel a la fonction iload de YVM
 	 */

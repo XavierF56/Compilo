@@ -17,6 +17,10 @@ public class Declaration implements YakaConstants{
 		this.nomFonction = fonc;
 	}
 	
+	public String getNomFonction(){
+		return this.nomFonction;
+	}
+	
 	public void setTypeEntier() {
 		this.type = ENTIER;
 	}
@@ -54,11 +58,11 @@ public class Declaration implements YakaConstants{
 		Yaka.tabIdent.rangeIdent(nom, new IdVar(type));
 	}
 	
-	void ajoutIdentFonc(){
+	void ajoutIdentFonc(String nom){
 		Yaka.tabIdent.rangeIdentGlob(nom, new IdFonction(type));
 	}
 	
-	void ajoutIdentParam(){
+	void ajoutIdentParam(String nom){
 		Yaka.tabIdent.chercheIdentGlob(nomFonction).addParam(type);
 		Yaka.tabIdent.rangeIdent(nom, new IdParam(type));
 	}
