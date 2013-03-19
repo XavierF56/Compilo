@@ -647,10 +647,9 @@ public class Yaka implements YakaConstants {
         jj_la1[27] = jj_gen;
         break label_11;
       }
-      instruction();
-      jj_consume_token(55);
+      suiteInstr();
     }
-                                                                                           yvm.goTo(); yvm.fait();
+                                                                                       yvm.goTo(); yvm.fait();
     jj_consume_token(FAIT);
   }
 
@@ -675,10 +674,9 @@ public class Yaka implements YakaConstants {
         jj_la1[28] = jj_gen;
         break label_12;
       }
-      instruction();
-      jj_consume_token(55);
+      suiteInstr();
     }
-                                                                      yvm.goToCond();yvm.sinon();
+                                                                  yvm.goToCond();yvm.sinon();
     jj_consume_token(SINON);
     label_13:
     while (true) {
@@ -696,10 +694,9 @@ public class Yaka implements YakaConstants {
         jj_la1[29] = jj_gen;
         break label_13;
       }
-      instruction();
-      jj_consume_token(55);
+      suiteInstr();
     }
-                                                                                                                                yvm.fsi();
+                                                                                                                       yvm.fsi();
     jj_consume_token(FSI);
   }
 
