@@ -225,6 +225,32 @@ public class YVM implements YakaConstants{
 		Ecriture.ecrireString(file, "FSI"+indexCondi+":\n");
 		indexCondi++;
 	}
+	
+	/* Fonctions */
+	
+	public void nomFonc( String nom){
+		Ecriture.ecrireString (file, nom + ": \n");
+	}
+	
+	public void ouvreBloc(int taille){
+		Ecriture.ecrireString(file, "ouvbloc" + taille);
+	}
+	
+	public void fermeBloc(int taille){
+		Ecriture.ecrireString(file, "fermebloc" + taille+"\n");
+	}
+	
+	public void call(String nom){
+		Ecriture.ecrireString(file, "call" + nom +"\n");
+	}
+	
+	public void reserveRetour(){
+		Ecriture.ecrireString(file, "reserveRetour\n");
+	}
+	
+	public void ireturn(int taille){
+		Ecriture.ecrireString(file, "ireturn"+ taille +"\n");
+	}
 
 
 

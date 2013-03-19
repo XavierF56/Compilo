@@ -18,6 +18,7 @@ public class IdFonction extends Ident {
 	public void addParam (int type) {
 		parametre.add(type);
 	}
+	
 	public int taille (){
 		return (parametre.size() * 2 );
 	}
