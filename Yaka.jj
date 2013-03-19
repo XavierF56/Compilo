@@ -203,7 +203,7 @@ void retourne() : {}
 
 void argumentsFonction() : {}
 {
-  "(" ( expression() ("," expression())* )? ")"
+  "(" ( expression() {expression.testParam();}("," expression() {expression.testParam();})* )? ")"
 }
 
 
@@ -352,7 +352,7 @@ void valeur () : {}
  | <ident>
  (
  {expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));}
- argumentsFonction() {expression.empileParam();}
+ argumentsFonction() {expression.clotureFonction();}
  )?
  {expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
  tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();}

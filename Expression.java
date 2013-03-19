@@ -11,7 +11,7 @@ public class Expression implements YakaConstants {
 	/**Attributs Fonction **/
 	private IdFonction fonction;
 	private Stack<IdFonction> pileFonctions = new Stack<IdFonction>();
-	private Stack<Integer> pileCompteurs = Stack<Integer>();
+	private Stack<Integer> pileCompteurs = new Stack<Integer>();
 	
 	public Expression(){
 		pileOperandes = new Stack<Integer>();
@@ -178,7 +178,6 @@ public class Expression implements YakaConstants {
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : le type de retour de la fonction n'est pas correct");
 		}
 	}
-	
 	
 	public void setFonction(IdFonction f){
 		fonction = f;

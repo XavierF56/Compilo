@@ -73,7 +73,9 @@ public class Yaka implements YakaConstants {
     type();
     jj_consume_token(FONCTION);
     jj_consume_token(ident);
-           declaration.ajoutIdentFonc(YakaTokenManager.identLu);declaration.setNomFonction(YakaTokenManager.identLu);
+    declaration.ajoutIdentFonc(YakaTokenManager.identLu);
+        declaration.setNomFonction(YakaTokenManager.identLu);
+        expression.setFonction();
     paramForms();
     bloc();
     jj_consume_token(FFONCTION);
@@ -115,6 +117,7 @@ public class Yaka implements YakaConstants {
   static final public void retourne() throws ParseException {
     jj_consume_token(RETOURNE);
     expression();
+        expression.testRetourne();
   }
 
   static final public void argumentsFonction() throws ParseException {
@@ -128,6 +131,7 @@ public class Yaka implements YakaConstants {
     case 52:
     case 63:
       expression();
+                      expression.testParam();
       label_3:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -140,6 +144,7 @@ public class Yaka implements YakaConstants {
         }
         jj_consume_token(53);
         expression();
+                                                                 expression.testParam();
       }
       break;
     default:
@@ -502,7 +507,9 @@ public class Yaka implements YakaConstants {
       jj_consume_token(ident);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case 52:
+  expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
         argumentsFonction();
+  expression.clotureFonction();
         break;
       default:
         jj_la1[21] = jj_gen;
