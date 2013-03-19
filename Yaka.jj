@@ -173,7 +173,9 @@ void analyse() : {}
 }
 void declFonction() : {}
 {
-  type() <FONCTION> <ident> paramForms()
+  type() <FONCTION> <ident>  {	expression.setFonction();
+  }
+  paramForms()
   bloc()
   <FFONCTION>
 }
@@ -190,7 +192,8 @@ void paramForm() : {}
 
 void retourne() : {}
 {
-  <RETOURNE> expression()
+  <RETOURNE> expression()  {	expression.testRetourne();	
+  }
 }
 
 void argumentsFonction() : {}
@@ -341,7 +344,11 @@ void primaire (): {}
 
 void valeur () : {}
 { <entier> {expression.empiler(ENTIER); yvm.iconst(YakaTokenManager.entierLu);}		
- | <ident> (argumentsFonction())?
+ | <ident>
+ (
+ {expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));}
+ argumentsFonction() {expression.empileParam();}
+ )?
  {expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
  tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();}
  | <VRAI>  {expression.empiler(VRAI); yvm.iconst(-1);}
