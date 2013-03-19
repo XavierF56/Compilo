@@ -173,19 +173,21 @@ void analyse() : {}
 }
 void declFonction() : {}
 {
-  type() <FONCTION> <ident> paramForms()
+  type() <FONCTION>  
+  <ident> {declaration.ajoutIdentFonc(YakaTokenManager.identLu);declaration.setNomFonction(YakaTokenManager.identLu);}
+  paramForms()
   bloc()
   <FFONCTION>
 }
 
 void paramForms() : {}
 {
-  "(" (paraForm() ("," paramForm())* )? ")"
+  "(" (paramForm() ("," paramForm())* )? ")"
 }
 
 void paramForm() : {}
 {
-  type() <ident>
+  type() <ident> {declaration.ajoutIdentParam(YakaTokenManager.identLu);}
 }
 
 void retourne() : {}

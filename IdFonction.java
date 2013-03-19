@@ -5,6 +5,7 @@ public class IdFonction extends Ident {
 	private int resultat;
 	private ArrayList<Integer> parametre = new ArrayList();
 	
+	
 	public void setResultat (int res) {
 		resultat = res;
 	}
