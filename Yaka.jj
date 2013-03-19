@@ -198,7 +198,7 @@ void retourne() : {}
 void argumentsFonction() : {}
 {
   "(" ( expression() ("," expression())* )? ")"
-
+}
 
 
 void bloc() : {}{
