@@ -3,6 +3,7 @@ public class Declaration implements YakaConstants{
 	private int type;
 	private String nom;
 	private int valeur;
+	private String nomFonction;
 	
 	/*public void setConst(){ constVar = CONST;}
 	public void setVar(){ constVar = VAR;}*/
@@ -11,6 +12,11 @@ public class Declaration implements YakaConstants{
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
+	public void setNomFonction(String fonc){
+		this.nomFonction = fonc;
+	}
+	
 	public void setTypeEntier() {
 		this.type = ENTIER;
 	}
@@ -46,6 +52,15 @@ public class Declaration implements YakaConstants{
 	
 	void ajoutIdentVar(String nom){
 		Yaka.tabIdent.rangeIdent(nom, new IdVar(type));
+	}
+	
+	void ajoutIdentFonc(){
+		Yaka.tabIdent.rangeIdentGlob(nom, new IdFonction(type));
+	}
+	
+	void ajoutIdentParam(){
+		Yaka.tabIdent.chercheIdentGlob(nomFonction).addParam(type);
+		Yaka.tabIdent.rangeIdent(nom, new IdParam(type));
 	}
 	
 	/*void ajoutIdent(){

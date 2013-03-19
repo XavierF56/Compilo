@@ -173,7 +173,12 @@ void analyse() : {}
 }
 void declFonction() : {}
 {
-  type() <FONCTION> <ident>  {	expression.setFonction();
+  type() <FONCTION>  
+  <ident>
+  {
+    declaration.ajoutIdentFonc(YakaTokenManager.identLu);
+  	declaration.setNomFonction(YakaTokenManager.identLu);
+ 	expression.setFonction();
   }
   paramForms()
   bloc()
@@ -182,12 +187,12 @@ void declFonction() : {}
 
 void paramForms() : {}
 {
-  "(" (paraForm() ("," paramForm())* )? ")"
+  "(" (paramForm() ("," paramForm())* )? ")"
 }
 
 void paramForm() : {}
 {
-  type() <ident>
+  type() <ident> {declaration.ajoutIdentParam(YakaTokenManager.identLu);}
 }
 
 void retourne() : {}
@@ -199,7 +204,7 @@ void retourne() : {}
 void argumentsFonction() : {}
 {
   "(" ( expression() ("," expression())* )? ")"
-
+}
 
 
 void bloc() : {}{
