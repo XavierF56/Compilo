@@ -629,7 +629,7 @@ public class Yaka implements YakaConstants {
     jj_consume_token(TANTQUE);
                    yvm.tantQue();
     expression();
-                                                 yvm.faire();
+                                                 yvm.faire();expression.clotureIterationCondition();
     jj_consume_token(FAIRE);
     label_11:
     while (true) {
@@ -649,14 +649,14 @@ public class Yaka implements YakaConstants {
       }
       suiteInstr();
     }
-                                                                                       yvm.goTo(); yvm.fait();
+                                 yvm.goTo(); yvm.fait();
     jj_consume_token(FAIT);
   }
 
   static final public void conditionnelle() throws ParseException {
     jj_consume_token(SI);
     expression();
-                           yvm.alors();
+                           yvm.alors(); expression.clotureIterationCondition();
     jj_consume_token(ALORS);
     label_12:
     while (true) {
@@ -676,7 +676,7 @@ public class Yaka implements YakaConstants {
       }
       suiteInstr();
     }
-                                                                  yvm.goToCond();yvm.sinon();
+                                  yvm.goToCond();yvm.sinon();
     jj_consume_token(SINON);
     label_13:
     while (true) {
@@ -696,7 +696,7 @@ public class Yaka implements YakaConstants {
       }
       suiteInstr();
     }
-                                                                                                                       yvm.fsi();
+                                 yvm.fsi();
     jj_consume_token(FSI);
   }
 

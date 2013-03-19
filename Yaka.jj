@@ -393,12 +393,17 @@ void opNeg() : {}
 
 void iteration() : {}
 {
-	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();}<FAIRE> (suiteInstr())* {yvm.goTo(); yvm.fait();} <FAIT>
+	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();expression.clotureIterationCondition();}
+	<FAIRE> (suiteInstr())* {yvm.goTo(); yvm.fait();} 
+	<FAIT>
 }
 
 void conditionnelle() : {}
 {
-	<SI> expression() {yvm.alors();}<ALORS> (suiteInstr() )* {yvm.goToCond();yvm.sinon();}<SINON> (suiteInstr())* {yvm.fsi();}<FSI>
+	<SI> expression() {yvm.alors(); expression.clotureIterationCondition();}
+	<ALORS> (suiteInstr() )* {yvm.goToCond();yvm.sinon();}
+	<SINON> (suiteInstr())* {yvm.fsi();}
+	<FSI>
 }
 
 

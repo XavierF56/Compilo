@@ -62,7 +62,7 @@ public class Declaration implements YakaConstants{
 	void ajoutIdentParam(String nom){
 		Yaka.tabIdent.chercheIdentGlob(nomFonction).addParam(type);
 		Yaka.tabIdent.rangeIdent(nom, new IdParam(type));
-		System.out.println(Yaka.tabIdent.toString());
+		//System.out.println(Yaka.tabIdent.toString());
 	}
 	
 	/*void ajoutIdent(){

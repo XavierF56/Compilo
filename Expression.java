@@ -141,7 +141,7 @@ public class Expression implements YakaConstants {
 			Yaka.erreur = true;
 		}else if (typeAffectation > 0) {
 			if(!(typeAffectation == last)){
-				System.out.println("ERREUR ligne " + Yaka.ligne + " : lors de l'affectation");
+				System.out.println("ERREUR ligne " + Yaka.ligne + " : lors de l'affectation " + last +" "+typeAffectation);
 				Yaka.erreur = true;
 			}else{
 				Yaka.yvm.istore(offsetAffectation);
@@ -164,6 +164,17 @@ public class Expression implements YakaConstants {
 		}
 	}
 	
+	
+	
+	/** Conditionnelle et Iteration **/
+	public void clotureIterationCondition() {
+		int last = pileOperandes.pop();
+		if (last == ERREUR){
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : expresion incorrect");
+		}
+		System.out.println("grejfher " + pileOperandes);
+	}
+	
 	public void setTypeAffectation(int a){typeAffectation = a;}
 	
 	public void setOffsetAffectation(int a){offsetAffectation = a;}
@@ -177,6 +188,7 @@ public class Expression implements YakaConstants {
 		else{
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : le type de retour de la fonction n'est pas correct");
 		}
+		System.out.println("Operandes apres return " + pileOperandes);
 	}
 	
 	public void setFonction(IdFonction f){
@@ -194,6 +206,7 @@ public class Expression implements YakaConstants {
 		if(typeEnCours != typeParam){
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : le type du parametre num�ro " + compteur + " ne correspond pas � celui de la fonction" );
 		}
+		System.out.println(">>>>>>>>>>>>>>>>>>>>> "+typeEnCours+" // normal : "+typeParam + " //// "+pileOperandes);
 	}
 	
 	public void clotureFonction(){
@@ -202,8 +215,11 @@ public class Expression implements YakaConstants {
 		if (compteur != nbParam) {
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " +"?" + " est de " + nbParam);
 		}
+		
 		int type = pileFonctions.pop().getResultat();
 		pileOperandes.push(type);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>> "+type+" "+pileOperandes);
+
 	}
 
 }
