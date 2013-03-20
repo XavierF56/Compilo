@@ -137,14 +137,6 @@ push word ptr [bp-4]
 push word ptr 5
 
 
-;iload -4
-push word ptr [bp-4]
-
-
-;iload -4
-push word ptr [bp-4]
-
-
 ;iconst 2
 push word ptr 2
 
@@ -184,10 +176,6 @@ sub ax,bx
 push ax
 
 
-;iload -4
-push word ptr [bp-4]
-
-
 ;iadd
 pop bx 
 pop ax 
@@ -214,12 +202,9 @@ push ax
 push word ptr [bp-4]
 
 
-;iload -4
-push word ptr [bp-4]
-
-
-;iload -4
-push word ptr [bp-4]
+;istore -8
+pop ax 
+mov word ptr [bp-8], ax
 
 
 ;aLaLigne

@@ -21,9 +21,7 @@ public class Expression implements YakaConstants {
 	
 	public boolean controleType(){
 		int a,b, op = 0;
-		//System.out.println(pileOperandes);
-		//System.out.println(pileOperateurs);
-
+		
 		b = pileOperandes.pop();
 		op = pileOperateurs.pop();
 		a = pileOperandes.pop();
@@ -58,6 +56,8 @@ public class Expression implements YakaConstants {
 			pileOperandes.push(ERREUR);
 			return false;
 		}
+		
+
 	}
 	
 	public boolean controleTypeNEG(){
@@ -141,7 +141,7 @@ public class Expression implements YakaConstants {
 			Yaka.erreur = true;
 		}else if (typeAffectation > 0) {
 			if(!(typeAffectation == last)){
-				System.out.println("ERREUR ligne " + Yaka.ligne + " : lors de l'affectation " + last +" "+typeAffectation);
+				System.out.println("ERREUR ligne " + Yaka.ligne + " : lors de l'affectation");
 				Yaka.erreur = true;
 			}else{
 				Yaka.yvm.istore(offsetAffectation);
@@ -172,7 +172,6 @@ public class Expression implements YakaConstants {
 		if (last == ERREUR){
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : expresion incorrect");
 		}
-		System.out.println("grejfher " + pileOperandes);
 	}
 	
 	public void setTypeAffectation(int a){typeAffectation = a;}
@@ -188,7 +187,6 @@ public class Expression implements YakaConstants {
 		else{
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : le type de retour de la fonction n'est pas correct");
 		}
-		System.out.println("Operandes apres return " + pileOperandes);
 	}
 	
 	public void setFonction(IdFonction f){
@@ -199,29 +197,31 @@ public class Expression implements YakaConstants {
 		pileCompteurs.push(0);
 	}
 	public void testParam(){
-		int compteur = pileCompteurs.pop() + 1;
-		pileCompteurs.push(compteur);
-		int typeEnCours = pileOperandes.pop();
-		int typeParam = pileFonctions.peek().getParam(compteur-1);
-		if(typeEnCours != typeParam){
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : le type du parametre num�ro " + compteur + " ne correspond pas � celui de la fonction" );
+		IdFonction id = pileFonctions.peek();
+		
+		if(id != null){
+			int compteur = pileCompteurs.pop() + 1;
+			pileCompteurs.push(compteur);
+			int typeEnCours = pileOperandes.pop();
+			int typeParam = pileFonctions.peek().getParam(compteur-1);
+			if(typeEnCours != typeParam){
+				System.out.println("ERREUR ligne " + Yaka.ligne + " : le type du parametre numero " + compteur + " ne correspond pas a celui de la fonction" );
+			}
 		}
-		System.out.println(">>>>>>>>>>>>>>>>>>>>> "+typeEnCours+" // normal : "+typeParam + " //// "+pileOperandes);
 	}
 	
 	public void clotureFonction(){
-		int compteur = pileCompteurs.pop();
-		int nbParam = pileFonctions.peek().getTaille();
-		if (compteur != nbParam) {
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " +"?" + " est de " + nbParam);
+		IdFonction id = pileFonctions.peek();
+		if(id != null){
+			int compteur = pileCompteurs.pop();
+			int nbParam = pileFonctions.peek().getTaille();
+			if (compteur != nbParam) {
+				System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " +"?" + " est de " + nbParam);
+			}
+			int type = pileFonctions.pop().getResultat();
+			pileOperandes.push(type);
+		} else {
+			pileOperandes.push(ERREUR);
 		}
-		
-		int type = pileFonctions.pop().getResultat();
-		pileOperandes.push(type);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>> "+type+" "+pileOperandes);
-
 	}
-
 }
-
-

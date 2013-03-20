@@ -29,6 +29,7 @@ public class Yaka{
 	public static YVM yvm ;
 	public static int ligne = 1;
 	public static boolean erreur = false;
+	public static boolean finAppelFonction = false;
 
 
   public static void main(String args[]) { 
@@ -201,10 +202,7 @@ void retourne() : {}
   }
 }
 
-void argumentsFonction() : {}
-{
-  "(" ( expression() {expression.testParam();}("," expression() {expression.testParam();})* )? ")"
-}
+
 
 
 void bloc() : {}{
@@ -316,7 +314,7 @@ void expression() : {}
   simpleExpr() 
   (opRel() 
   simpleExpr() 
-  {expression.controleType(); yvm.opRel();})?
+  {expression.controleType(); yvm.opRel();})? {}
 }
 
 
@@ -347,15 +345,27 @@ void primaire (): {}
  
 }
 
+void argumentsFonction() : {}
+{
+  "(" (expression() {expression.testParam();}("," expression() {expression.testParam();})* )? ")"
+}
+
 void valeur () : {}
-{ <entier> {expression.empiler(ENTIER); yvm.iconst(YakaTokenManager.entierLu);}		
+{ <entier> { expression.empiler(ENTIER); yvm.iconst(YakaTokenManager.entierLu);}		
  | <ident>
  (
  {expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));}
- argumentsFonction() {expression.clotureFonction();}
+ argumentsFonction() {expression.clotureFonction();finAppelFonction = true;}
  )?
- {expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
- tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();}
+ {
+ 	if(finAppelFonction) {
+ 		finAppelFonction = false;
+ 	} else {
+ 		expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
+ 		tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();
+ 	}
+ }
+ 
  | <VRAI>  {expression.empiler(VRAI); yvm.iconst(-1);}
  | <FAUX>  {expression.empiler(FAUX); yvm.iconst(0);}	
  
@@ -391,6 +401,8 @@ void opNeg() : {}
  | <NON> {expression.empiler(NON); yvm.push(NON);}
 }
 
+
+/** Conditionnelle et Iteration **/
 void iteration() : {}
 {
 	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();expression.clotureIterationCondition();}

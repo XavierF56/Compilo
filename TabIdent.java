@@ -53,6 +53,10 @@ public class TabIdent implements YakaConstants{
 		}
 	}
 	
+	public boolean isIdFonction(String cle) {
+		return globaux.containsKey(cle);
+	}
+	
 	
 	
 	public String toString() {
