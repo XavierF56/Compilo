@@ -70,6 +70,36 @@ public class Yaka implements YakaConstants {
     jj_consume_token(FPROGRAMME);
   }
 
+  static final public void bloc() throws ParseException {
+    label_2:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CONST:
+        ;
+        break;
+      default:
+        jj_la1[1] = jj_gen;
+        break label_2;
+      }
+      declConst();
+    }
+    label_3:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case VAR:
+        ;
+        break;
+      default:
+        jj_la1[2] = jj_gen;
+        break label_3;
+      }
+      declVar();
+    }
+  yvm.ouvrePrinc(- IdVar.getPrinc());
+    suiteInstr();
+  }
+
+/******************** Fonction *********************/
   static final public void declFonction() throws ParseException {
     type();
     jj_consume_token(FONCTION);
@@ -88,22 +118,22 @@ public class Yaka implements YakaConstants {
     case BOOLEEN:
     case ENTIER:
       paramForm();
-      label_2:
+      label_4:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case 53:
           ;
           break;
         default:
-          jj_la1[1] = jj_gen;
-          break label_2;
+          jj_la1[3] = jj_gen;
+          break label_4;
         }
         jj_consume_token(53);
         paramForm();
       }
       break;
     default:
-      jj_la1[2] = jj_gen;
+      jj_la1[4] = jj_gen;
       ;
     }
     jj_consume_token(54);
@@ -121,35 +151,7 @@ public class Yaka implements YakaConstants {
         expression.testRetourne();
   }
 
-  static final public void bloc() throws ParseException {
-    label_3:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case CONST:
-        ;
-        break;
-      default:
-        jj_la1[3] = jj_gen;
-        break label_3;
-      }
-      declConst();
-    }
-    label_4:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case VAR:
-        ;
-        break;
-      default:
-        jj_la1[4] = jj_gen;
-        break label_4;
-      }
-      declVar();
-    }
-  yvm.ouvrePrinc(- IdVar.getPrinc());
-    suiteInstr();
-  }
-
+/******************** Declaration *********************/
   static final public void declConst() throws ParseException {
     jj_consume_token(CONST);
     defConst();
@@ -360,9 +362,7 @@ public class Yaka implements YakaConstants {
     }
   }
 
-/*
- * Expression .
- */
+/********************* Expression ************************/
   static final public void expression() throws ParseException {
     simpleExpr();
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -631,7 +631,7 @@ public class Yaka implements YakaConstants {
     }
   }
 
-/** Conditionnelle et Iteration **/
+/*********** Conditionnelle et Iteration ****************/
   static final public void iteration() throws ParseException {
     jj_consume_token(TANTQUE);
                    yvm.tantQue();
@@ -727,10 +727,10 @@ public class Yaka implements YakaConstants {
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x8100,0x0,0x8100,0x80000,0x200,0x0,0x120000,0x0,0x8100,0x0,0x52000,0x52000,0x1120000,0x0,0x0,0x400000,0x800000,0x1120000,0x120000,0x0,0x1120000,0x0,0x120000,0x0,0x400000,0x800000,0x1000000,0x52000,0x52000,0x52000,};
+      jj_la1_0 = new int[] {0x8100,0x80000,0x200,0x0,0x8100,0x0,0x120000,0x0,0x8100,0x0,0x52000,0x52000,0x1120000,0x0,0x0,0x400000,0x800000,0x1120000,0x120000,0x0,0x1120000,0x0,0x120000,0x0,0x400000,0x800000,0x1000000,0x52000,0x52000,0x52000,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x200000,0x0,0x0,0x0,0x200000,0x50000,0x200000,0x0,0x800000,0x40007,0x40007,0x801d0000,0x5,0x3f000000,0xc0000000,0x0,0x80150000,0x150000,0x200000,0x80150000,0x100000,0x50000,0x3f000000,0xc0000000,0x0,0x80000000,0x40007,0x40007,0x40007,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x200000,0x0,0x200000,0x50000,0x200000,0x0,0x800000,0x40007,0x40007,0x801d0000,0x5,0x3f000000,0xc0000000,0x0,0x80150000,0x150000,0x200000,0x80150000,0x100000,0x50000,0x3f000000,0xc0000000,0x0,0x80000000,0x40007,0x40007,0x40007,};
    }
    private static void jj_la1_init_2() {
       jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x3,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x3,0x0,0x0,0x0,0x0,};

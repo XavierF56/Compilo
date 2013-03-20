@@ -165,8 +165,8 @@ public class Expression implements YakaConstants {
 	}
 	
 	
-	
-	/** Conditionnelle et Iteration **/
+	/****************** Conditionnelle et Iteration *******************/
+
 	public void clotureIterationCondition() {
 		int last = pileOperandes.pop();
 		if (last == ERREUR){
@@ -178,7 +178,12 @@ public class Expression implements YakaConstants {
 	
 	public void setOffsetAffectation(int a){offsetAffectation = a;}
 	
-	/** Fonction **/
+	
+	
+	/*************************** Fonction ******************************/
+	/** 
+	 * Verifie si la valeur de retour d'une fonction est correcte
+	 */
 	public void testRetourne() {
 		int type = pileOperandes.pop();
 		int typeRetour = fonction.getResultat();
@@ -189,17 +194,31 @@ public class Expression implements YakaConstants {
 		}
 	}
 	
+	/**
+	 * Lors de la declaration d'une fonction, cette mettode permet lors du testRetourne 
+	 * de savoir dans quelle fonction nous sommes
+	 * @param f
+	 */
 	public void setFonction(IdFonction f){
 		fonction = f;
 	}
+	
+	/**
+	 * Lors de l'appel à une fonction, cette mettode permet lors du testParam
+	 * de savoir dans quelle fonction nous sommes
+	 * @param f
+	 */
 	public void setFonctionPile(IdFonction f){
 		pileFonctions.push(f);
 		pileCompteurs.push(0);
 	}
+	
+	/**
+	 * Cette metode permet de tester si les parametres passes lors d'un appel a une fonction sont correctes
+	 */
 	public void testParam(){
 		IdFonction id = pileFonctions.peek();
-		
-		if(id != null){
+		if(id != null){ // Dans le cas ou la fonction n'existe pas
 			int compteur = pileCompteurs.pop() + 1;
 			pileCompteurs.push(compteur);
 			int typeEnCours = pileOperandes.pop();
@@ -212,7 +231,7 @@ public class Expression implements YakaConstants {
 	
 	public void clotureFonction(){
 		IdFonction id = pileFonctions.peek();
-		if(id != null){
+		if(id != null){ // Dans le cas ou la fonction n'existe pas
 			int compteur = pileCompteurs.pop();
 			int nbParam = pileFonctions.peek().getTaille();
 			if (compteur != nbParam) {

@@ -172,6 +172,14 @@ void analyse() : {}
    {yvm.queue();}
    <FPROGRAMME> 
 }
+
+void bloc() : {}{
+ (declConst())*
+ (declVar())*		
+ {yvm.ouvrePrinc(- IdVar.getPrinc());} suiteInstr() 
+}
+
+/******************** Fonction *********************/
 void declFonction() : {}
 {
   type() <FONCTION>  
@@ -205,11 +213,8 @@ void retourne() : {}
 
 
 
-void bloc() : {}{
- (declConst())*
- (declVar())*		
- {yvm.ouvrePrinc(- IdVar.getPrinc());} suiteInstr() 
-}
+/******************** Declaration *********************/
+
 
 void declConst() : {}
 {
@@ -306,9 +311,10 @@ void ecriture() :{}
   
 }
 
-/*
- * Expression .
- */
+
+
+
+/********************* Expression ************************/
 void expression() : {}
 {
   simpleExpr() 
@@ -316,8 +322,6 @@ void expression() : {}
   simpleExpr() 
   {expression.controleType(); yvm.opRel();})? {}
 }
-
-
 
 void simpleExpr() : {}
 {
@@ -402,7 +406,7 @@ void opNeg() : {}
 }
 
 
-/** Conditionnelle et Iteration **/
+/*********** Conditionnelle et Iteration ****************/
 void iteration() : {}
 {
 	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();expression.clotureIterationCondition();}
@@ -417,11 +421,3 @@ void conditionnelle() : {}
 	<SINON> (suiteInstr())* {yvm.fsi();}
 	<FSI>
 }
-
-
-
-
-
-
-
-
