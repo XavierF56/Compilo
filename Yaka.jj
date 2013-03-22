@@ -166,7 +166,7 @@ void analyse() : {}
 {
    <PROGRAMME> {yvm.entete();} <ident>	
    (declFonction() )* 
-   <PRINCIPAL> {yvm.main()}
+   <PRINCIPAL> {yvm.main();}
    bloc() 
    <FPRINCIPAL>
    {yvm.queue();}
@@ -363,16 +363,17 @@ void argumentsFonction() : {}
 void valeur () : {}
 { <entier> { expression.empiler(ENTIER); yvm.iconst(YakaTokenManager.entierLu);}		
  | <ident>
+ 
  (
- {yvm.reserveRetour();
-  expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));}
+ {yvm.reserveRetour();expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));}
  argumentsFonction()
  {expression.clotureFonction();finAppelFonction = true;}
  )?
+ 
  {
  	if(finAppelFonction) {
  		finAppelFonction = false;
- 		tabIdent.chercheIdentGlob(YakaTokenManager.identLu).yvm();
+ 		tabIdent.chercheIdentGlob(expression.getNomFonction()).yvm();
  	} else {
  		expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
  		tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();

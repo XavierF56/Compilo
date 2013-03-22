@@ -64,6 +64,7 @@ public class Yaka implements YakaConstants {
       declFonction();
     }
     jj_consume_token(PRINCIPAL);
+                yvm.main();
     bloc();
     jj_consume_token(FPRINCIPAL);
     yvm.queue();
@@ -95,7 +96,7 @@ public class Yaka implements YakaConstants {
       }
       declVar();
     }
-  yvm.ouvrePrinc(- IdVar.getPrinc());
+               yvm.ouvreBloc(Ident.getCompteur()*2);
     suiteInstr();
   }
 
@@ -104,11 +105,13 @@ public class Yaka implements YakaConstants {
     type();
     jj_consume_token(FONCTION);
     jj_consume_token(ident);
-    declaration.ajoutIdentFonc(YakaTokenManager.identLu);
+        yvm.nomFonc(YakaTokenManager.identLu);
+        declaration.ajoutIdentFonc(YakaTokenManager.identLu);
         expression.setFonction(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
     paramForms();
     bloc();
-   tabIdent.raz();
+   yvm.fermeBloc(IdParam.getCompteur()*2);
+  tabIdent.raz();
     jj_consume_token(FFONCTION);
   }
 
@@ -149,6 +152,7 @@ public class Yaka implements YakaConstants {
     jj_consume_token(RETOURNE);
     expression();
         expression.testRetourne();
+        yvm.ireturn(IdParam.getCompteur()*2+4);
   }
 
 /******************** Declaration *********************/
@@ -509,7 +513,7 @@ public class Yaka implements YakaConstants {
       jj_consume_token(ident);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case 52:
-  expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
+  yvm.reserveRetour();expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
         argumentsFonction();
   expression.clotureFonction();finAppelFonction = true;
         break;
@@ -519,6 +523,7 @@ public class Yaka implements YakaConstants {
       }
         if(finAppelFonction) {
                 finAppelFonction = false;
+                tabIdent.chercheIdentGlob(expression.getNomFonction()).yvm();
         } else {
                 expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType());
                 tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();

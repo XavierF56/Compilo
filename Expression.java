@@ -237,10 +237,14 @@ public class Expression implements YakaConstants {
 			if (compteur != nbParam) {
 				System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " +"?" + " est de " + nbParam);
 			}
-			int type = pileFonctions.pop().getResultat();
+			int type = pileFonctions.peek().getResultat();
 			pileOperandes.push(type);
 		} else {
 			pileOperandes.push(ERREUR);
 		}
+	}
+	
+	public String getNomFonction() {
+		return pileFonctions.pop().getNom();
 	}
 }
