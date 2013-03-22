@@ -1,6 +1,6 @@
 
 public class IdParam extends Ident{
-	private static int prochain_offset = 0;
+	private static int prochain_offset = 4;
 	private boolean affecte;
 	private static int compteur = 0;
 	
@@ -17,7 +17,7 @@ public class IdParam extends Ident{
 		this.affecte = affecte;
 	}
 	
-	public static void raz(){prochain_offset = 0;}
+	public static void raz(){prochain_offset = 4;}
 	
 	public String toString() {
 		return "( Parametre : type : " + type + " ; offset : " + offset + ")";
@@ -28,5 +28,12 @@ public class IdParam extends Ident{
 	}
 	public static void razCompteur() {
 		compteur = 0;
+	}
+	
+	/**
+	 * Methode d'appel a la fonction iconst de YVM
+	 */
+	public void yvm() {
+		Yaka.yvm.iload(super.offset);
 	}
 }
