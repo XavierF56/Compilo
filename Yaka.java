@@ -513,7 +513,12 @@ public class Yaka implements YakaConstants {
       jj_consume_token(ident);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case 52:
+<<<<<<< HEAD
   yvm.reserveRetour();expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
+=======
+  yvm.reserveRetour();
+  expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
         argumentsFonction();
   expression.clotureFonction();finAppelFonction = true;
         break;
@@ -523,7 +528,11 @@ public class Yaka implements YakaConstants {
       }
         if(finAppelFonction) {
                 finAppelFonction = false;
+<<<<<<< HEAD
                 tabIdent.chercheIdentGlob(expression.getNomFonction()).yvm();
+=======
+                tabIdent.chercheIdentGlob(YakaTokenManager.identLu).yvm();
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
         } else {
                 expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType());
                 tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();

@@ -6,13 +6,23 @@ extrn ecrch:proc, ligsuiv:proc
 .586
 
 .CODE
+<<<<<<< HEAD
 debut:
 STARTUPCODE
 
 max: 
+=======
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
 
+max: 
 
+<<<<<<< HEAD
 ;ouvbloc 6enter 6,0
+=======
+
+;ouvbloc 6
+enter 6,0
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
 
 ;istore -6
 pop ax 
@@ -67,9 +77,15 @@ FSI1:
 leave
 ret 4
 min: 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
 
 ;ouvbloc 0enter 0,0
+
+;ouvbloc 0
+enter 0,0
 
 ;iinf
 pop bx 
@@ -111,7 +127,13 @@ FSI2:
 leave
 ret 4
 sup: 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
+
+;ouvbloc 0
+enter 0,0
 
 ;ouvbloc 0enter 0,0
 
@@ -133,10 +155,22 @@ mov [bp+8], ax
 ;fermebloc 4
 leave
 ret 4
+<<<<<<< HEAD
 main:
 
 
 ;ouvbloc 8enter 8,0
+=======
+
+
+debut:
+STARTUPCODE
+
+main:
+
+;ouvbloc 8
+enter 8,0
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
 
 ;iconst 5
 push word ptr 5
@@ -159,6 +193,7 @@ call ligsuiv
 
 ;reserveRetour
 sub sp,2
+<<<<<<< HEAD
 
 
 ;iload -4
@@ -195,6 +230,8 @@ sub sp,2
 
 ;iconst 1
 push word ptr 1
+=======
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
 
 
 ;reserveRetour
@@ -205,6 +242,7 @@ sub sp,2
 push word ptr [bp-2]
 
 
+<<<<<<< HEAD
 ;iload -4
 push word ptr [bp-4]
 
@@ -248,12 +286,17 @@ pop bx
 pop ax 
 imul bx
 push ax
+=======
+;reserveRetour
+sub sp,2
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
 
 
 ;iload -4
 push word ptr [bp-4]
 
 
+<<<<<<< HEAD
 ;call min
 call min
 
@@ -295,3 +338,7 @@ call ecrbool
 nop
 EXITCODE
 End debut
+=======
+;iconst 5
+push word ptr 5
+>>>>>>> 678325a5e92c2ef7a5f27347bf0cd9fe106ae46b
