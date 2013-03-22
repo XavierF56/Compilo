@@ -166,7 +166,7 @@ void analyse() : {}
 {
    <PROGRAMME> {yvm.entete();} <ident>	
    (declFonction() )* 
-   <PRINCIPAL> 
+   <PRINCIPAL> {yvm.main()}
    bloc() 
    <FPRINCIPAL>
    {yvm.queue();}
@@ -175,22 +175,25 @@ void analyse() : {}
 
 void bloc() : {}{
  (declConst())*
- (declVar())*		
- {yvm.ouvrePrinc(- IdVar.getPrinc());} suiteInstr() 
+ (declVar())* {yvm.ouvreBloc(Ident.getCompteur()*2);}
+ //{yvm.ouvrePrinc(- IdVar.getPrinc());} 
+  suiteInstr() 
 }
 
 /******************** Fonction *********************/
 void declFonction() : {}
 {
-  type() <FONCTION>  
+  type() <FONCTION> 
   <ident>
-  {
-    declaration.ajoutIdentFonc(YakaTokenManager.identLu);
+  {	yvm.nomFonc(YakaTokenManager.identLu);
+   	declaration.ajoutIdentFonc(YakaTokenManager.identLu);
  	expression.setFonction(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
   }
   paramForms()
   bloc()
-  {tabIdent.raz();}
+  {yvm.fermeBloc(IdParam.getCompteur()*2);
+  tabIdent.raz();
+  }
   <FFONCTION>
 }
 
@@ -206,7 +209,10 @@ void paramForm() : {}
 
 void retourne() : {}
 {
-  <RETOURNE> expression()  {	expression.testRetourne();	
+  <RETOURNE> expression()
+  {
+	expression.testRetourne();
+	yvm.ireturn(IdParam.getCompteur()*2+4);	
   }
 }
 
@@ -358,12 +364,15 @@ void valeur () : {}
 { <entier> { expression.empiler(ENTIER); yvm.iconst(YakaTokenManager.entierLu);}		
  | <ident>
  (
- {expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));}
- argumentsFonction() {expression.clotureFonction();finAppelFonction = true;}
+ {yvm.reserveRetour();
+  expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));}
+ argumentsFonction()
+ {expression.clotureFonction();finAppelFonction = true;}
  )?
  {
  	if(finAppelFonction) {
  		finAppelFonction = false;
+ 		tabIdent.chercheIdentGlob(YakaTokenManager.identLu).yvm();
  	} else {
  		expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
  		tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();

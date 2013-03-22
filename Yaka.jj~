@@ -29,6 +29,7 @@ public class Yaka{
 	public static YVM yvm ;
 	public static int ligne = 1;
 	public static boolean erreur = false;
+	public static boolean finAppelFonction = false;
 
 
   public static void main(String args[]) { 
@@ -118,7 +119,7 @@ TOKEN :
 | <FONCTION : "FONCTION">
 | <FFONCTION  : "FFONCTION">
 | <PROGRAMME : "PROGRAMME" >
-| <FPROGRAMME: "FPROGRAMME" >
+| <FPROGRAMME : "FPROGRAMME" >
 | <PRINCIPAL : "PRINCIPAL">
 | <FPRINCIPAL : "FPRINCIPAL">
 | <ALORS : "ALORS">
@@ -137,8 +138,6 @@ TOKEN :
 | <DIFFERENT : "DIFFERENT">
 | <ERREUR : "ERREUR">
 | <NEG : "NEG">
-| <TANTQUE : "TANTQUE">
-| <FAIRE : "FAIRE">
 }
 
 
@@ -166,16 +165,62 @@ TOKEN  :
 void analyse() : {}
 {
    <PROGRAMME> {yvm.entete();} <ident>	
-   bloc()
+   (declFonction() )* 
+   <PRINCIPAL> 
+   bloc() 
+   <FPRINCIPAL>
    {yvm.queue();}
    <FPROGRAMME> 
 }
 
 void bloc() : {}{
  (declConst())*
- (declVar())*		
- {yvm.ouvrePrinc(- IdVar.getPrinc());} suiteInstr() 
+ (declVar())* {yvm.ouvreBloc(Ident.getCompteur()*2);}
+ //{yvm.ouvrePrinc(- IdVar.getPrinc());} 
+  suiteInstr() 
 }
+
+/******************** Fonction *********************/
+void declFonction() : {}
+{
+  type() <FONCTION> 
+  <ident>
+  {	yvm.nomFonc(YakaTokenManager.identLu);
+   	declaration.ajoutIdentFonc(YakaTokenManager.identLu);
+ 	expression.setFonction(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
+  }
+  paramForms()
+  bloc()
+  {yvm.fermeBloc(IdParam.getCompteur()*2);
+  tabIdent.raz();
+  }
+  <FFONCTION>
+}
+
+void paramForms() : {}
+{
+  "(" (paramForm() ("," paramForm())* )? ")"
+}
+
+void paramForm() : {}
+{
+  type() <ident> {declaration.ajoutIdentParam(YakaTokenManager.identLu);}
+}
+
+void retourne() : {}
+{
+  <RETOURNE> expression()
+  {
+	expression.testRetourne();
+	yvm.ireturn(IdParam.getCompteur()*2+4);	
+  }
+}
+
+
+
+
+/******************** Declaration *********************/
+
 
 void declConst() : {}
 {
@@ -234,10 +279,12 @@ void suiteInstr() :{}
 
 void instruction() :{}
 {
-	affectation()
+    affectation()
   | lecture()
   | ecriture()
   | iteration()
+  | conditionnelle()
+  | retourne()
 }
 
 void affectation() :{}
@@ -255,7 +302,10 @@ void affectation() :{}
 void lecture() :{}
 {
 	<LIRE>"("<ident>")"
-	{yvm.lireEnt(((IdVar)tabIdent.chercheIdent(YakaTokenManager.identLu)).getOffset());}
+	{
+		((IdVar)tabIdent.chercheIdent(YakaTokenManager.identLu)).setAffecte(true);
+		yvm.lireEnt(((IdVar)tabIdent.chercheIdent(YakaTokenManager.identLu)).getOffset());
+	}
 }
 
 void ecriture() :{}
@@ -267,18 +317,17 @@ void ecriture() :{}
   
 }
 
-/*
- * Expression .
- */
+
+
+
+/********************* Expression ************************/
 void expression() : {}
 {
   simpleExpr() 
   (opRel() 
   simpleExpr() 
-  {expression.controleType(); yvm.opRel();})?
+  {expression.controleType(); yvm.opRel();})? {}
 }
-
-
 
 void simpleExpr() : {}
 {
@@ -306,10 +355,30 @@ void primaire (): {}
  
 }
 
+void argumentsFonction() : {}
+{
+  "(" (expression() {expression.testParam();}("," expression() {expression.testParam();})* )? ")"
+}
+
 void valeur () : {}
-{ <entier> {expression.empiler(ENTIER); yvm.iconst(YakaTokenManager.entierLu);}		
- | <ident> {expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
- tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();}
+{ <entier> { expression.empiler(ENTIER); yvm.iconst(YakaTokenManager.entierLu);}		
+ | <ident>
+ (
+ {yvm.reserveRetour();
+  expression.setFonctionPile(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));}
+ argumentsFonction()
+ {expression.clotureFonction();finAppelFonction = true;}
+ )?
+ {
+ 	if(finAppelFonction) {
+ 		finAppelFonction = false;
+ 		tabIdent.chercheIdentGlob(YakaTokenManager.identLu).yvm();
+ 	} else {
+ 		expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
+ 		tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();
+ 	}
+ }
+ 
  | <VRAI>  {expression.empiler(VRAI); yvm.iconst(-1);}
  | <FAUX>  {expression.empiler(FAUX); yvm.iconst(0);}	
  
@@ -324,6 +393,7 @@ void opRel() : {}
  | ">" 	{expression.empiler(SUP); yvm.push(SUP);}	
  | ">=" {expression.empiler(SUPOUEG); yvm.push(SUPOUEG);}
 } 
+
 
 void opAdd() : {}
 {
@@ -344,14 +414,19 @@ void opNeg() : {}
  | <NON> {expression.empiler(NON); yvm.push(NON);}
 }
 
+
+/*********** Conditionnelle et Iteration ****************/
 void iteration() : {}
 {
-	<TANTQUE> expression() <FAIRE> (instruction())*;	
+	<TANTQUE> {yvm.tantQue();} expression() {yvm.faire();expression.clotureIterationCondition();}
+	<FAIRE> (suiteInstr())* {yvm.goTo(); yvm.fait();} 
+	<FAIT>
 }
 
-
-
-
-
-
-
+void conditionnelle() : {}
+{
+	<SI> expression() {yvm.alors(); expression.clotureIterationCondition();}
+	<ALORS> (suiteInstr() )* {yvm.goToCond();yvm.sinon();}
+	<SINON> (suiteInstr())* {yvm.fsi();}
+	<FSI>
+}
