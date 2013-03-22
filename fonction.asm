@@ -202,11 +202,6 @@ push ax
 push word ptr [bp-4]
 
 
-;istore -8
-pop ax 
-mov word ptr [bp-8], ax
-
-
 ;aLaLigne
 call ligsuiv
 

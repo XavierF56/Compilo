@@ -227,7 +227,6 @@ public class YVM implements YakaConstants{
 	}
 	
 	/* Fonctions */
-	
 	public void nomFonc( String nom){
 		Ecriture.ecrireString (file, nom + ": \n");
 	}
@@ -251,9 +250,8 @@ public class YVM implements YakaConstants{
 	public void ireturn(int taille){
 		Ecriture.ecrireString(file, "ireturn"+ taille +"\n");
 	}
-
-
-
-
 	
+	public void main() {
+		Ecriture.ecrireString(file, "main:\n");
+	}
 }

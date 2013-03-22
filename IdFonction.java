@@ -47,4 +47,8 @@ public class IdFonction extends Ident implements YakaConstants{
 	public String toString() {
 		return ("resultat : " + resultat + "/parametres : " + parametre);
 	}
+	
+	public void yvm() {
+		Yaka.yvm.call(nom);
+	}
 }

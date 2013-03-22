@@ -3,8 +3,7 @@ ENTIER FONCTION max (ENTIER i, ENTIER j)
 VAR BOOLEEN b,c;
 VAR ENTIER k;
 k = i;
-SI (k>j)
-ALORS RETOURNE k
+SI k>j ALORS RETOURNE k
 SINON RETOURNE j FSI
 FFONCTION
 ENTIER FONCTION min (ENTIER i, ENTIER j)
@@ -14,23 +13,17 @@ FFONCTION
 BOOLEEN FONCTION sup(ENTIER i, ENTIER j)
 RETOURNE i>j
 FFONCTION
-
 PRINCIPAL
 VAR ENTIER i,j,k;
 VAR BOOLEEN b;
 i=5;LIRE(j);ALALIGNE;
-k=max (i,min(j,5));
-SI 4 ALORS k=2 SINON FSI;
-k=sup(4, min(i*2,j));
-TANTQUE sup(4, min(i*2,j))+2 FAIRE
-	SI pini() ALORS k=ini() SINON FSI
-	k=max (i,min(j,5));
-FAIT;
-
-b=VRAI;
+k=max (i,min(j,5))+2;
+b=sup(1+max(i,j-5),
+min(i*2,j));
 ALALIGNE;
 ECRIRE(k);
 ALALIGNE;
 ECRIRE(b);
 FPRINCIPAL
 FPROGRAMME
+
