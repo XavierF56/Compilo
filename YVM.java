@@ -232,15 +232,15 @@ public class YVM implements YakaConstants{
 	}
 	
 	public void ouvreBloc(int taille){
-		Ecriture.ecrireString(file, "ouvbloc" + taille);
+		Ecriture.ecrireString(file, "ouvbloc " + taille);
 	}
 	
 	public void fermeBloc(int taille){
-		Ecriture.ecrireString(file, "fermebloc" + taille+"\n");
+		Ecriture.ecrireString(file, "fermebloc " + taille+"\n");
 	}
 	
 	public void call(String nom){
-		Ecriture.ecrireString(file, "call" + nom +"\n");
+		Ecriture.ecrireString(file, "call " + nom +"\n");
 	}
 	
 	public void reserveRetour(){
@@ -248,7 +248,7 @@ public class YVM implements YakaConstants{
 	}
 	
 	public void ireturn(int taille){
-		Ecriture.ecrireString(file, "ireturn"+ taille +"\n");
+		Ecriture.ecrireString(file, "ireturn "+ taille +"\n");
 	}
 	
 	public void main() {

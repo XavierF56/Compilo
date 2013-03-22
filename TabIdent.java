@@ -67,6 +67,8 @@ public class TabIdent implements YakaConstants{
 		locaux.clear();
 		IdParam.raz();
 		IdVar.raz();
+		Ident.razCompteur();
+		IdParam.razCompteur();
 	}
 	
 }
