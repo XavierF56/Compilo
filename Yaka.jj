@@ -364,6 +364,7 @@ void valeur () : {}
  {
  	if(finAppelFonction) {
  		finAppelFonction = false;
+ 		tabIdent.chercheIdentGlob(YakaTokenManager.identLu).yvm();
  	} else {
  		expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
  		tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();

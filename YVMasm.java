@@ -283,36 +283,34 @@ public class YVMasm extends YVM {
 	public void ouvreBloc(int taille){
 		Ecriture.ecrireString(file,"\n\n;");
 		super.alors();
-		Ecriture.ecrireString(file, "ouvbloc" + taille);
+		Ecriture.ecrireString(file, "enter " + taille+",0");
 	}
 	
 	public void fermeBloc(int taille){
 		Ecriture.ecrireString(file,"\n\n;");
 		super.alors();
-		Ecriture.ecrireString(file, "fermebloc" + taille+"\n");
+		Ecriture.ecrireString(file, "leave\nret " + taille+"\n");
 	}
 	
 	public void call(String nom){
 		Ecriture.ecrireString(file,"\n\n;");
 		super.alors();
-		Ecriture.ecrireString(file, "call" + nom +"\n");
+		Ecriture.ecrireString(file, "call " + nom +"\n");
 	}
 	
 	public void reserveRetour(){
 		Ecriture.ecrireString(file,"\n\n;");
 		super.alors();
-		Ecriture.ecrireString(file, "reserveRetour\n");
+		Ecriture.ecrireString(file, "sub sp,2\n");
 	}
 	
 	public void ireturn(int taille){
 		Ecriture.ecrireString(file,"\n\n;");
 		super.alors();
-		Ecriture.ecrireString(file, "ireturn"+ taille +"\n");
+		Ecriture.ecrireString(file, "pop ax\nmov [bp+"+taille+"], ax\n");
 	}
 	
 	public void main() {
-		Ecriture.ecrireString(file,"\n\n;");
-		super.alors();
 		Ecriture.ecrireString(file, "main:\n");
 	}
 
