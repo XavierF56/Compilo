@@ -166,7 +166,7 @@ void analyse() : {}
 {
    <PROGRAMME> {yvm.entete();} <ident>	
    (declFonction() )* 
-   <PRINCIPAL> {yvm.main()}
+   <PRINCIPAL> {yvm.main();}
    bloc() 
    <FPRINCIPAL>
    {yvm.queue();}

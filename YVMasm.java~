@@ -311,6 +311,6 @@ public class YVMasm extends YVM {
 	}
 	
 	public void main() {
-		Ecriture.ecrireString(file, "\n\ndebut:\nSTARTUPCODE\n\nmain:");
+		Ecriture.ecrireString(file, "\n\ndebut:\nSTARTUPCODE\n\nmain:\n");
 	}
 }

@@ -232,7 +232,7 @@ public class YVM implements YakaConstants{
 	}
 	
 	public void ouvreBloc(int taille){
-		Ecriture.ecrireString(file, "ouvbloc " + taille + "\n");
+		Ecriture.ecrireString(file, "ouvbloc " + taille);
 	}
 	
 	public void fermeBloc(int taille){
