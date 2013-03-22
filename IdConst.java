@@ -7,6 +7,8 @@ public class IdConst extends Ident {
 		super();
 		val = v;
 		type = t;
+		compteur++;
+
 	}
 
 	public int getVal() {

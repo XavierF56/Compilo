@@ -8,6 +8,7 @@ public class IdVar extends Ident {
 		prochain_offset -= 2;
 		super.offset = prochain_offset;
 		affecte = false;
+		compteur++;
 	}
 	
 	public void setAffecte(boolean affecte) {

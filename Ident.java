@@ -1,6 +1,7 @@
 public class Ident {
 	protected int offset = 0;
-	protected int type;
+	protected int type;	
+	protected static int compteur = 0;	
 	
 	public int getType() {
 		return type;
@@ -19,5 +20,12 @@ public class Ident {
 	}
 	
 	public void setAffecte(boolean affecte) {
+	}
+	
+	public static int getCompteur() {
+		return compteur;
+	}
+	public static void razCompteur() {
+		compteur = 0;
 	}
 }

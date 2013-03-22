@@ -313,5 +313,4 @@ public class YVMasm extends YVM {
 	public void main() {
 		Ecriture.ecrireString(file, "main:\n");
 	}
-
 }
