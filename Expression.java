@@ -170,7 +170,7 @@ public class Expression implements YakaConstants {
 	public void clotureIterationCondition() {
 		int last = pileOperandes.pop();
 		if (last == ERREUR){
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : expresion incorrect");
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : expression incorrecte");
 		}
 	}
 	
@@ -235,7 +235,7 @@ public class Expression implements YakaConstants {
 			int compteur = pileCompteurs.pop();
 			int nbParam = pileFonctions.peek().getTaille();
 			if (compteur != nbParam) {
-				System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " +"?" + " est de " + nbParam);
+				System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction doit etre egal a " + nbParam);
 			}
 			int type = pileFonctions.peek().getResultat();
 			pileOperandes.push(type);
@@ -245,6 +245,11 @@ public class Expression implements YakaConstants {
 	}
 	
 	public String getNomFonction() {
-		return pileFonctions.pop().getNom();
+			IdFonction fonction = pileFonctions.pop(); 
+			if (fonction!=null)
+				return fonction.getNom();
+			else 
+				return "RIEN";
+
 	}
 }

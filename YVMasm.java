@@ -41,7 +41,6 @@ public class YVMasm extends YVM {
 	public void inot() {
 		Ecriture.ecrireString(file,"\n\n");
 		Ecriture.ecrireString(file,"pop ax \n xor ax,-1 \n push ax\n");
-		//----------------------------------------------------------------------> ERREUR ???
 	}
 
 	@Override
@@ -111,14 +110,23 @@ public class YVMasm extends YVM {
 	public void iload(int offset) {
 		Ecriture.ecrireString(file,"\n\n;");
 		super.iload(offset);
-		Ecriture.ecrireString(file,"push word ptr [bp" + offset +"]\n");
+		if (offset < 0) {
+			Ecriture.ecrireString(file,"push word ptr [bp" + offset +"]\n");
+		} else {
+			Ecriture.ecrireString(file,"push word ptr [bp+" + offset +"]\n");	
+		}
 	}
 
 	@Override
 	public void istore(int offset) {
 		Ecriture.ecrireString(file,"\n\n;");
 		super.istore(offset);
-		Ecriture.ecrireString(file,"pop ax \nmov word ptr [bp" + offset + "], ax\n");
+		
+		if (offset < 0) {
+			Ecriture.ecrireString(file,"pop ax \nmov word ptr [bp" + offset + "], ax\n");
+		} else {
+			Ecriture.ecrireString(file,"pop ax \nmov word ptr [bp+" + offset + "], ax\n");	
+		}
 }
 
 	@Override

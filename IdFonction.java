@@ -29,8 +29,8 @@ public class IdFonction extends Ident implements YakaConstants{
 	}
 	
 	public int getParam(int index){
-		if (index > parametre.size()) {
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " + nom + " est de " + parametre.size());
+		if (index >= parametre.size()) {
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " + nom + " doit etre egal a " + parametre.size());
 			return ERREUR;
 		}
 		return parametre.get(index);

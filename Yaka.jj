@@ -189,7 +189,7 @@ void declFonction() : {}
    	declaration.ajoutIdentFonc(YakaTokenManager.identLu);
  	expression.setFonction(tabIdent.chercheIdentGlob(YakaTokenManager.identLu));
   }
-  paramForms()
+  paramForms(){tabIdent.setOffsets();}
   bloc()
   {yvm.fermeBloc(IdParam.getCompteur()*2);
   tabIdent.raz();
@@ -373,7 +373,8 @@ void valeur () : {}
  {
  	if(finAppelFonction) {
  		finAppelFonction = false;
- 		tabIdent.chercheIdentGlob(expression.getNomFonction()).yvm();
+ 		Yaka.yvm.call(expression.getNomFonction());
+ 		//tabIdent.chercheIdentGlob(expression.getNomFonction()).yvm();
  	} else {
  		expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
  		tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();

@@ -13,8 +13,8 @@ max:
 ;ouvbloc 6
 enter 6,0
 
-;iload 0
-push word ptr [bp0]
+;iload 6
+push word ptr [bp+6]
 
 
 ;istore -6
@@ -26,8 +26,8 @@ mov word ptr [bp-6], ax
 push word ptr [bp-6]
 
 
-;iload 2
-push word ptr [bp2]
+;iload 4
+push word ptr [bp+4]
 
 
 ;isup
@@ -62,8 +62,8 @@ jmp FSI1
 SINON1:
 
 
-;iload 2
-push word ptr [bp2]
+;iload 4
+push word ptr [bp+4]
 
 
 ;ireturn 8
@@ -83,12 +83,12 @@ min:
 ;ouvbloc 0
 enter 0,0
 
-;iload 0
-push word ptr [bp0]
+;iload 6
+push word ptr [bp+6]
 
 
-;iload 2
-push word ptr [bp2]
+;iload 4
+push word ptr [bp+4]
 
 
 ;iinf
@@ -107,8 +107,8 @@ cmp ax,0
 je SINON2
 
 
-;iload 0
-push word ptr [bp0]
+;iload 6
+push word ptr [bp+6]
 
 
 ;ireturn 8
@@ -123,8 +123,8 @@ jmp FSI2
 SINON2:
 
 
-;iload 2
-push word ptr [bp2]
+;iload 4
+push word ptr [bp+4]
 
 
 ;ireturn 8
@@ -144,22 +144,8 @@ sup:
 ;ouvbloc 0
 enter 0,0
 
-;iload 0
-push word ptr [bp0]
-
-
-;iload 2
-push word ptr [bp2]
-
-
-;isup
-pop bx 
-pop ax 
-cmp ax,bx 
-jle $+6 
-push -1 
-jmp $+4 
-push 0 
+;iconst 2
+push word ptr 2
 
 
 ;ireturn 8
@@ -203,12 +189,24 @@ call ligsuiv
 sub sp,2
 
 
+;iload -2
+push word ptr [bp-2]
+
+
+;reserveRetour
+sub sp,2
+
+
 ;iload -4
 push word ptr [bp-4]
 
 
-;iload -2
-push word ptr [bp-2]
+;iconst 5
+push word ptr 5
+
+
+;call min
+call min
 
 
 ;call max
@@ -271,33 +269,6 @@ pop bx
 pop ax 
 add ax,bx
 push ax
-
-
-;reserveRetour
-sub sp,2
-
-
-;iload -2
-push word ptr [bp-2]
-
-
-;iconst 2
-push word ptr 2
-
-
-;imul
-pop bx 
-pop ax 
-imul bx
-push ax
-
-
-;iload -4
-push word ptr [bp-4]
-
-
-;call min
-call min
 
 
 ;call sup

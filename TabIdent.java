@@ -3,11 +3,12 @@ import java.util.* ;
 public class TabIdent implements YakaConstants{
 	private HashMap<String,IdFonction> globaux;
 	private HashMap<String,Ident> locaux;
-
+	private Stack<IdParam> pileParams;
 	
 	public TabIdent(){
 		globaux = new HashMap<String,IdFonction>();
 		locaux = new HashMap<String,Ident>();
+		pileParams = new Stack<IdParam>();
 	}
 	
 	/**
@@ -40,6 +41,9 @@ public class TabIdent implements YakaConstants{
 		if (locaux.containsKey(clef)) {
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : l'element '" + clef + "' est deja declare");
 		} else {
+			if(id instanceof IdParam){
+				pileParams.push((IdParam)id);
+			}
 			locaux.put(clef,id);
 		}
 	}
@@ -69,6 +73,12 @@ public class TabIdent implements YakaConstants{
 		IdVar.raz();
 		Ident.razCompteur();
 		IdParam.razCompteur();
+	}
+	
+	public void setOffsets(){
+		while(!(pileParams.isEmpty())){
+			pileParams.pop().setOffset();
+		}
 	}
 	
 }

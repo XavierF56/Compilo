@@ -7,10 +7,14 @@ public class IdParam extends Ident{
 	public IdParam (int t){
 		super();
 		super.type = t;
-		super.offset = prochain_offset;
-		prochain_offset += 2;
+		
 		affecte = false;
 		compteur++;
+	}
+	
+	public void setOffset(){
+		super.offset = prochain_offset;
+		prochain_offset += 2;
 	}
 	
 	public void setAffecte(boolean affecte) {
