@@ -6,12 +6,14 @@ k = i;
 SI k>j ALORS RETOURNE k
 SINON RETOURNE j FSI
 FFONCTION
+
 ENTIER FONCTION min (ENTIER i, ENTIER j)
 SI i<j ALORS RETOURNE i
 SINON RETOURNE j FSI
 FFONCTION
+
 BOOLEEN FONCTION sup(ENTIER i, ENTIER j)
-RETOURNE 2
+RETOURNE sup(1+max(i,j-5), 23)
 FFONCTION
 
 PRINCIPAL
@@ -20,8 +22,8 @@ VAR BOOLEEN b;
 i=5;
 LIRE(j);
 ALALIGNE;
-k=max (i,min(j,5))+2;
-b=sup(1+max(i,j-5));
+k=max (5,min(j,5))+2;
+b=sup (1+max(4,j-5), 23);
 ALALIGNE;
 ECRIRE(k);
 ALALIGNE;

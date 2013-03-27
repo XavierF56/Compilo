@@ -40,7 +40,6 @@ public class Expression implements YakaConstants {
 		} else if ((a == ENTIER) && (b == ENTIER)) {
 			if (estOperateurCalcul(op)){
 				pileOperandes.push(ENTIER);
-				//System.out.println(pileOperandes);
 				return true ;
 			}
 			if (estOperateurComp(op) || estOperateurEg(op))
@@ -137,7 +136,7 @@ public class Expression implements YakaConstants {
 		int last = pileOperandes.pop();
 
 		if (last == ERREUR){
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : expresion incorrect");
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : expression incorrecte");
 			Yaka.erreur = true;
 		}else if (typeAffectation > 0) {
 			if(!(typeAffectation == last)){

@@ -144,8 +144,54 @@ sup:
 ;ouvbloc 0
 enter 0,0
 
-;iconst 2
-push word ptr 2
+;reserveRetour
+sub sp,2
+
+
+;iconst 1
+push word ptr 1
+
+
+;reserveRetour
+sub sp,2
+
+
+;iload 6
+push word ptr [bp+6]
+
+
+;iload 4
+push word ptr [bp+4]
+
+
+;iconst 5
+push word ptr 5
+
+
+;isub
+pop bx 
+pop ax 
+sub ax,bx
+push ax
+
+
+;call max
+call max
+
+
+;iadd
+pop bx 
+pop ax 
+add ax,bx
+push ax
+
+
+;iconst 23
+push word ptr 23
+
+
+;call sup
+call sup
 
 
 ;ireturn 8
@@ -189,8 +235,8 @@ call ligsuiv
 sub sp,2
 
 
-;iload -2
-push word ptr [bp-2]
+;iconst 5
+push word ptr 5
 
 
 ;reserveRetour
@@ -241,8 +287,8 @@ push word ptr 1
 sub sp,2
 
 
-;iload -2
-push word ptr [bp-2]
+;iconst 4
+push word ptr 4
 
 
 ;iload -4
@@ -269,6 +315,10 @@ pop bx
 pop ax 
 add ax,bx
 push ax
+
+
+;iconst 23
+push word ptr 23
 
 
 ;call sup

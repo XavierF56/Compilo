@@ -20,7 +20,7 @@ public class TabIdent implements YakaConstants{
 		if (!locaux.containsKey(clef)) {
 			id = new IdConst(ERREUR, 0);
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : l'element '" + clef + "' n'est pas declare");
-			Yaka.erreur = true;
+			this.rangeIdent(clef, id);
 		} else {
 			id = locaux.get(clef); 
 		}
