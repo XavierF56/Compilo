@@ -346,12 +346,8 @@ call ecrent
 call ligsuiv
 
 
-;iload -8
-push word ptr [bp-8]
-
-
-;ecrireBool
-call ecrbool
+;iconst 0
+push word ptr 0
 
 
 ;queue
