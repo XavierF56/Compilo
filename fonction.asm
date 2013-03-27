@@ -270,11 +270,6 @@ add ax,bx
 push ax
 
 
-;istore -6
-pop ax 
-mov word ptr [bp-6], ax
-
-
 ;reserveRetour
 sub sp,2
 

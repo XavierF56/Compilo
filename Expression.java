@@ -8,17 +8,25 @@ public class Expression implements YakaConstants {
 	private int offsetAffectation = 0;
 	
 	
-	/**Attributs Fonction **/
+	/**Attributs pour la gestion des Fonctions **/
 	private IdFonction fonction;
 	private Stack<IdFonction> pileFonctions = new Stack<IdFonction>();
 	private Stack<Integer> pileCompteurs = new Stack<Integer>();
 	
+	/**
+	 * Constructeur d'une expression
+	 */
 	public Expression(){
 		pileOperandes = new Stack<Integer>();
 		pileOperateurs =  new Stack<Integer>();
 		
 	}
 	
+	/**
+	 * Cette fonction realise le controle de type : 
+	 * elle verifie que les deux operandes en haut de pile corespondent a l'operation
+	 * @return boolean
+	 */
 	public boolean controleType(){
 		int a,b, op = 0;
 		
@@ -59,6 +67,10 @@ public class Expression implements YakaConstants {
 
 	}
 	
+	/**
+	 * cette fonction realise la meme operation que la methode precedente pour les operations neg et not
+	 * @return boolean
+	 */
 	public boolean controleTypeNEG(){
 		int a = pileOperandes.pop();
 		int op = pileOperateurs.pop();
@@ -74,21 +86,46 @@ public class Expression implements YakaConstants {
 			}
 	}
 
-	// Indique si notre operateur est "+ ou - ou * ou / 
+	
+	/**
+	 * Indique si notre operateur est + ou - ou * ou / 
+	 * @param l'operation etudiee
+	 * @return boolean
+	 */
 	public boolean estOperateurCalcul(int op) {
 		return (op == PLUS || op == MOINS || op == MULT || op == DIV);
 	}
+	
+	/**
+	 * Indique si notre operateur est inf ou sup ou infoueg ou supoueg 
+	 * @param l'operation etudiee
+	 * @return boolean
+	 */
 	public boolean estOperateurComp (int op) {
 		return (op == INF ||op == SUP || op == INFOUEG || op == SUPOUEG );
 	}
+	
+	/**
+	 * Indique si notre operateur est = ou !=  
+	 * @param l'operation etudiee
+	 * @return boolean
+	 */
 	public boolean estOperateurEg (int op) {
 		return (op == EGAL || op == DIFFERENT);
 	}
+	
+	/**
+	 * Indique si notre operateur est et ou ou 
+	 * @param l'operation etudiee
+	 * @return boolean
+	 */
 	public boolean estOperateurLogique (int op) {
 		return (op == ET || op == OU);
 	}
 	
-	// Empiler : Permet d'orienter sur les Piles les valeurs ou les opérateurs.
+	/**
+	 *  Empiler : Permet d'orienter sur les Piles les valeurs ou les opérateurs.
+	 */
 	public void empiler(int i){
 		switch (i)  {
 		case PLUS :  pileOperateurs.add(i);
@@ -132,6 +169,10 @@ public class Expression implements YakaConstants {
 		}
 	}
 	
+	/**
+	 * Cette methode est appelee lors de l'affectation 
+	 * Elle verifie si le parametre de retour de l'instruction correspond a celui du param affecte
+	 */
 	public void clotureExpression(){
 		int last = pileOperandes.pop();
 
@@ -155,6 +196,9 @@ public class Expression implements YakaConstants {
 		offsetAffectation = 0;
 	}
 	
+	/**
+	 * Cette methode verifie si le type de retour est un booleen
+	 */
 	public void retourneBooleen() {
 		int last = pileOperandes.pop();
 		if ( last != BOOLEEN ) {
@@ -163,19 +207,31 @@ public class Expression implements YakaConstants {
 		}
 	}
 	
+	/**
+	 * Cette fonction permet de sauvegarder le type de la variable lors de l'affectation
+	 * @param le type de la variable
+	 */
+	public void setTypeAffectation(int a){typeAffectation = a;}
+	
+	/**
+	 * Cette fonction permet de sauvegarder l'offset de la variable lors de l'affectation
+	 * @param l'offset de la variable
+	 */
+	public void setOffsetAffectation(int a){offsetAffectation = a;}
+	
 	
 	/****************** Conditionnelle et Iteration *******************/
-
+	/**
+	 * Cette methode est appelee lors du test de la condition de boucle ou de si
+	 */
 	public void clotureIterationCondition() {
 		int last = pileOperandes.pop();
 		if (last == ERREUR){
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : expression incorrecte");
 		}
 	}
+
 	
-	public void setTypeAffectation(int a){typeAffectation = a;}
-	
-	public void setOffsetAffectation(int a){offsetAffectation = a;}
 	
 	
 	
@@ -203,7 +259,7 @@ public class Expression implements YakaConstants {
 	}
 	
 	/**
-	 * Lors de l'appel à une fonction, cette mettode permet lors du testParam
+	 * Lors de l'appel a une fonction, cette mettode permet lors du testParam
 	 * de savoir dans quelle fonction nous sommes
 	 * @param f
 	 */
@@ -228,6 +284,10 @@ public class Expression implements YakaConstants {
 		}
 	}
 	
+	/**
+	 * Fonction intervenant apres la fin de l'appel d'une fonction dans le programme
+	 * Verifie si le nombre de parametres est bon et empile son type sur la pile des operandes
+	 */
 	public void clotureFonction(){
 		IdFonction id = pileFonctions.peek();
 		if(id != null){ // Dans le cas ou la fonction n'existe pas
@@ -242,6 +302,10 @@ public class Expression implements YakaConstants {
 			pileOperandes.push(ERREUR);
 		}
 	}
+	
+	/**
+	 * @return le nom de la fonction courante
+	 */
 	
 	public String getNomFonction() {
 			IdFonction fonction = pileFonctions.pop(); 
