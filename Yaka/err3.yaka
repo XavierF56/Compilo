@@ -1,4 +1,5 @@
 PROGRAMME max
+PRINCIPAL
 CONST 
 	a=2,
 	b=a,
@@ -9,5 +10,5 @@ CONST
 	
 VAR ENTIER i,j,k,n,s;
 VAR BOOLEEN c,d,e,f;	
-
+FPRINCIPAL
 FPROGRAMME

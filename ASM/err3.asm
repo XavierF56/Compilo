@@ -6,11 +6,13 @@ extrn ecrch:proc, ligsuiv:proc
 .586
 
 .CODE
+
+
+
 debut:
 STARTUPCODE
 
+main:
 
-
-;ouvrePrinc 18
-mov bp,sp
-sub sp,18
+;ouvbloc 18
+enter 18,0

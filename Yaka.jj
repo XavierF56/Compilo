@@ -37,11 +37,10 @@ public class Yaka{
     java.io.InputStream input;
 
     if (args.length==1) {
-      //System.out.print(args[args.length-1] + ": ");
       try {
-        input = new java.io.FileInputStream(args[args.length-1]+".yaka");
+        input = new java.io.FileInputStream("Yaka/"+args[args.length-1]+".yaka");
         fichier = args[args.length-1];
-      	yvm = new YVMasm(fichier + ".asm");
+      	yvm = new YVMasm("ASM/"+fichier + ".asm");
       } catch (java.io.FileNotFoundException e) {
         System.out.println("Fichier introuvable.");
         return;

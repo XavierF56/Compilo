@@ -10,20 +10,20 @@ extrn ecrch:proc, ligsuiv:proc
 max: 
 
 
-;ouvbloc 6
-enter 6,0
+;ouvbloc 12
+enter 12,0
 
 ;iload 6
 push word ptr [bp+6]
 
 
-;istore -6
+;istore -10
 pop ax 
-mov word ptr [bp-6], ax
+mov word ptr [bp-10], ax
 
 
-;iload -6
-push word ptr [bp-6]
+;iload -10
+push word ptr [bp-10]
 
 
 ;iload 4
@@ -46,8 +46,8 @@ cmp ax,0
 je SINON1
 
 
-;iload -6
-push word ptr [bp-6]
+;iload -10
+push word ptr [bp-10]
 
 
 ;ireturn 8
@@ -203,8 +203,42 @@ call ligsuiv
 sub sp,2
 
 
-;iload -2
-push word ptr [bp-2]
+;iconst 3
+push word ptr 3
+
+
+;iconst 4
+push word ptr 4
+
+
+;call sup
+call sup
+
+
+;iffaux SINON3
+pop ax
+cmp ax,0
+je SINON3
+
+
+;reserveRetour
+sub sp,2
+
+
+;reserveRetour
+sub sp,2
+
+
+;iconst 3
+push word ptr 3
+
+
+;iconst 4
+push word ptr 4
+
+
+;call sup
+call sup
 
 
 ;reserveRetour
@@ -241,6 +275,13 @@ push ax
 ;istore -6
 pop ax 
 mov word ptr [bp-6], ax
+
+
+;goto FSI3
+jmp FSI3
+
+
+SINON3:
 
 
 ;reserveRetour
@@ -321,6 +362,9 @@ pop ax
 mov word ptr [bp-8], ax
 
 
+FSI3:
+
+
 ;aLaLigne
 call ligsuiv
 
@@ -348,4 +392,4 @@ call ecrbool
 ;queue
 nop
 EXITCODE
-End debut
+end

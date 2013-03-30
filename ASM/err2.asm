@@ -6,15 +6,16 @@ extrn ecrch:proc, ligsuiv:proc
 .586
 
 .CODE
+
+
+
 debut:
 STARTUPCODE
 
+main:
 
-
-;ouvrePrinc 6
-mov bp,sp
-sub sp,6
-
+;ouvbloc 6
+enter 6,0
 
 ;iconst 2
 push word ptr 2
@@ -98,4 +99,4 @@ push ax
 ;queue
 nop
 EXITCODE
-End debut
+end

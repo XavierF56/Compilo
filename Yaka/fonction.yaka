@@ -1,7 +1,7 @@
 PROGRAMME param
 ENTIER FONCTION max (ENTIER i, ENTIER j)
-VAR BOOLEEN b,c;
-VAR ENTIER k;
+VAR BOOLEEN b,c,d,b;
+VAR ENTIER k,b;
 k = i;
 SI k>j ALORS RETOURNE k
 SINON RETOURNE j FSI
@@ -22,8 +22,11 @@ VAR BOOLEEN b;
 i=5;
 LIRE(j);
 ALALIGNE;
-k=max (i,min(j,5))+2;
+SI sup(3,4) ALORS 
+k=max (sup(3,4),min(j,5))+2;
+SINON
 b=sup (1+max(i,j-5), min(i*2,j));
+FSI;
 ALALIGNE;
 ECRIRE(k);
 ALALIGNE;
