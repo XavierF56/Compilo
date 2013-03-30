@@ -1,37 +1,47 @@
 
 public class IdParam extends Ident{
 	private static int prochain_offset = 4;
-	private boolean affecte;
 	private static int compteur = 0;
 	
+	/**
+	 * Constructeur de IdParam
+	 * @param t le type du parametre
+	 */
 	public IdParam (int t){
 		super();
 		super.type = t;
-		
-		affecte = false;
 		compteur++;
 	}
 	
+	/**
+	 * Methode permettant d'affecter un offset a un IdParam
+	 */
 	public void setOffset(){
 		super.offset = prochain_offset;
 		prochain_offset += 2;
 	}
 	
-	public void setAffecte(boolean affecte) {
-		this.affecte = affecte;
+	/**
+	 * Cette methode permet de remettre a zero les variable static
+	 */
+	public static void raz(){
+		prochain_offset = 4;
+		compteur = 0;
 	}
 	
-	public static void raz(){prochain_offset = 4;}
-	
-	public String toString() {
-		return "( Parametre : type : " + type + " ; offset : " + offset + ")";
+	/**
+	 * Cette methode permet de remettre le static int compteur a 0
+	 */
+	public static void razCompteur() {
+		
 	}
 	
+	/**
+	 * Getters pour obtenir le nombre de IdParam
+	 * @return la valeur du compteur
+	 */
 	public static int getCompteur() {
 		return compteur;
-	}
-	public static void razCompteur() {
-		compteur = 0;
 	}
 	
 	/**
@@ -39,5 +49,9 @@ public class IdParam extends Ident{
 	 */
 	public void yvm() {
 		Yaka.yvm.iload(super.offset);
+	}
+	
+	public String toString() {
+		return "( Parametre : type : " + type + " ; offset : " + offset + ")";
 	}
 }

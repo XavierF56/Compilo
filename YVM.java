@@ -101,7 +101,7 @@ public class YVM implements YakaConstants{
        Ecriture.ecrireString(file, "ouvrePrinc " + nb + "\n");
    }
    
-   /* Fonctions d'affectation, entrees, sorties */
+   /** Fonctions d'affectation, entrees, sorties **/
    
    public void ecrireEnt(){
 	   Ecriture.ecrireString(file, "ecrireEnt\n");
@@ -127,8 +127,7 @@ public class YVM implements YakaConstants{
 	   Ecriture.ecrireString(file, "queue\n");
    }
    
-   /* Categories d'operateurs */
-   
+   /** Categories d'operateurs **/
 	public void opNeg(){
 		int op = stop.pop();
 		
@@ -193,7 +192,7 @@ public class YVM implements YakaConstants{
 		stop.push(i);
 	}
 	
-	/* Iteration */
+	/** Iteration **/
 	public void tantQue() {
 		Ecriture.ecrireString(file, "FAIRE"+index+":\n");
 	}
@@ -208,7 +207,7 @@ public class YVM implements YakaConstants{
 		 index++;
 	}
 	
-	/* Conditionnelle */
+	/** Conditionnelle **/
 	public void alors() {
 		Ecriture.ecrireString(file, "iffaux SINON"+indexCondi+"\n");
 	}
@@ -226,7 +225,7 @@ public class YVM implements YakaConstants{
 		indexCondi++;
 	}
 	
-	/* Fonctions */
+	/** Fonctions **/
 	public void nomFonc( String nom){
 		Ecriture.ecrireString (file, nom + ": \n");
 	}

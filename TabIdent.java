@@ -80,7 +80,6 @@ public class TabIdent implements YakaConstants{
 	}
 	
 	/**
-	 * USELESS ?
 	 * Verifie si une fonction est declaree
 	 */
 	public boolean isIdFonction(String cle) {
@@ -94,12 +93,10 @@ public class TabIdent implements YakaConstants{
 		locaux.clear();
 		IdParam.raz();
 		IdVar.raz();
-		Ident.razCompteur();
-		IdParam.razCompteur();
 	}
 	
 	/**
-	 * Affecte aux IdPram les bons offsets
+	 * Lorsque tous les IdParam ont ete definis, affecte aux IdPram les bons offsets
 	 */
 	public void setOffsets(){
 		while(!(pileParams.isEmpty())){

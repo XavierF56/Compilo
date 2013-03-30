@@ -1,16 +1,20 @@
 public class IdConst extends Ident {
 	protected int val;
-
 	
-	
+	/**
+	 * Constructeur d'un IdConst
+	 * @param t le type de l'Id
+	 * @param v la valeur de l'Id
+	 */
 	public IdConst (int t, int v){
 		super();
 		val = v;
 		type = t;
-		compteur++;
-
 	}
 
+	/**
+	 * @return la valeur de l'IdConst
+	 */
 	public int getVal() {
 		return val;
 	}	
@@ -24,9 +28,5 @@ public class IdConst extends Ident {
 	
 	public String toString() {
 		return "( type : " + type + " ; val : " + val + ")";
-	}
-	
-	public void setAffecte(boolean affecte) {
-		System.out.println("ERREUR ligne " + Yaka.ligne + " : '" + YakaTokenManager.identLu + "' n'est pas une variable");
 	}
 }

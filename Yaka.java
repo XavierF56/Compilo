@@ -96,7 +96,7 @@ public class Yaka implements YakaConstants {
       }
       declVar();
     }
-               yvm.ouvreBloc(Ident.getCompteur()*2);
+               yvm.ouvreBloc(IdVar.getCompteur()*2);
     suiteInstr();
   }
 
@@ -525,7 +525,6 @@ public class Yaka implements YakaConstants {
         if(finAppelFonction) {
                 finAppelFonction = false;
                 Yaka.yvm.call(expression.getNomFonction());
-                //tabIdent.chercheIdentGlob(expression.getNomFonction()).yvm();
         } else {
                 expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType());
                 tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();

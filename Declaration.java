@@ -1,15 +1,12 @@
 public class Declaration implements YakaConstants{
-	//private int constVar;
 	private int type;
 	private String nom;
 	private int valeur;
 	private String nomFonction;
 	
-	/*public void setConst(){ constVar = CONST;}
-	public void setVar(){ constVar = VAR;}*/
-	
+	/******** Getters & Setters ********/
 	/**
-	 * Setter du paramètre nom
+	 * Setter du parametre nom
      * @param String : nom
      * @return ne retourne rien (void)
      */
@@ -18,7 +15,7 @@ public class Declaration implements YakaConstants{
 	}
 	
 	/**
-	 * Getter du paramètre nomFonction
+	 * Getter du parametre nomFonction
 	 * @param aucun
 	 * @return String : nom de la fonction
 	 */
@@ -27,7 +24,7 @@ public class Declaration implements YakaConstants{
 	}
 	
 	/**
-	 * Setter du type à la constante ENTIER
+	 * Setter du type a la constante ENTIER
      * @param aucun
      * @return ne retourne rien (void)
      */
@@ -35,7 +32,7 @@ public class Declaration implements YakaConstants{
 		this.type = ENTIER;
 	}
 	/**
-	 * Setter du type à la constante BOOLEEN
+	 * Setter du type a la constante BOOLEEN
      * @param aucun
      * @return ne retourne rien (void)
      */
@@ -43,16 +40,17 @@ public class Declaration implements YakaConstants{
 		this.type = BOOLEEN;
 	}
 	/**
-	 * Setter d'une valeur entière
-     * @param int : val (valeur stockée)
+	 * Setter d'une valeur entiere
+     * @param int : val (valeur stockee)
      * @return ne retourne rien (void)
      */
 	public void setValEntier(int val) {
 		valeur = val;
 		type = ENTIER;
 	}
+	
 	/**
-	 * Setter d'une valeur booléenne à FAUX
+	 * Setter d'une valeur booleenne a FAUX
      * @param aucun
      * @return ne retourne rien (void)
      */
@@ -60,8 +58,9 @@ public class Declaration implements YakaConstants{
 		valeur = 0;
 		type = BOOLEEN;
 	}
+	
 	/**
-	 * Setter d'une valeur booléenne à VRAI
+	 * Setter d'une valeur booleenne a VRAI
      * @param aucun
      * @return ne retourne rien (void)
      */
@@ -69,9 +68,10 @@ public class Declaration implements YakaConstants{
 		valeur = -1;
 		type = BOOLEEN;
 	}
+	
 	/**
-	 * Setter d'une valeur à partir d'un Ident
-     * @param int : val (valeur stockée)
+	 * Setter d'une valeur a partir d'un Ident
+     * @param int : val (valeur stockee)
      * @return ne retourne rien (void)
      */
 	public void setValIdent(String val){
@@ -79,24 +79,41 @@ public class Declaration implements YakaConstants{
 		type = id.getType();
 		valeur = ((IdConst) id).getVal();
 	}
+	
+	/******** Gestion des des ident const et var ********/
 	/**
-	 * Methode qui rajoute un Identconst à tabIdent
+	 * Methode qui rajoute un Identconst a tabIdent
 	 * @param aucun
 	 * @return ne retourne rien (void)
 	 */
 	void ajoutIdentConst(){
 		Yaka.tabIdent.rangeIdent(nom, new IdConst(type, valeur));
 	}
+	
+	
 	/**
-	 * Methode qui rajoute un IdentVar à tabIdent
+	 * Methode qui rajoute un IdentVar a tabIdent
 	 * @param aucun
 	 * @return ne retourne rien (void)
 	 */
 	void ajoutIdentVar(String nom){
 		Yaka.tabIdent.rangeIdent(nom, new IdVar(type));
 	}
+	
+	
+	/******** Gestion des fonctions ********/
 	/**
-	 * Methode qui rajoute un IdentFonction à tabIdent
+	 * Methode qui rajoute un IdentParam a tabIdent
+	 * @param aucun
+	 * @return ne retourne rien (void)
+	 */
+	void ajoutIdentParam(String nom){
+		Yaka.tabIdent.chercheIdentGlob(nomFonction).addParam(type);
+		Yaka.tabIdent.rangeIdent(nom, new IdParam(type));
+	}	
+	
+	/**
+	 * Methode qui rajoute un IdentFonction a tabIdent
 	 * @param aucun
 	 * @return ne retourne rien (void)
 	 */
@@ -104,32 +121,4 @@ public class Declaration implements YakaConstants{
 		Yaka.tabIdent.rangeIdentGlob(nom, new IdFonction(type, nom));
 		nomFonction = nom;
 	}
-	/**
-	 * Methode qui rajoute un IdentParam à tabIdent
-	 * @param aucun
-	 * @return ne retourne rien (void)
-	 */
-	void ajoutIdentParam(String nom){
-		Yaka.tabIdent.chercheIdentGlob(nomFonction).addParam(type);
-		Yaka.tabIdent.rangeIdent(nom, new IdParam(type));
-		//System.out.println(Yaka.tabIdent.toString());
-	}
-	
-	/*void ajoutIdent(){
-		Ident id;
-		if (constVar == CONST){
-			id = new IdConst(type, val);
-		}
-		else if ( constVar == VAR){
-			id = new IdVar(type);
-		}
-		else{
-			System.out.println("erreur dans declaration sur le type");
-		}
-		
-	
-		Yaka.tabIdent.rangeIdent(nom, id);
-	}*/
-	
-	
 }

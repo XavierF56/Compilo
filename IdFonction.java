@@ -5,29 +5,50 @@ public class IdFonction extends Ident implements YakaConstants{
 	private int resultat;
 	private ArrayList<Integer> parametre = new ArrayList<Integer>();
 	
-
+	/**
+	 * Constructeur d'un IdFonction
+	 * @param type de retour de la fonction
+	 * @param nom de la fonction
+	 */
 	public IdFonction (int type, String nom){
 		super();
 		this.nom = nom;
 		this.resultat = type;
 	}
 	
+	/**
+	 * Setters permettant d'affecter un Type(Entier ou Booleen) de retour pour cette fonction
+	 * @param res
+	 */
 	public void setResultat (int res) {
 		resultat = res;
 	}
 	
+	/**
+	 * @return retourne le type de retour de la fonction
+	 */
 	public int getResultat() {
 		return resultat;
 	}
 	
-	public void addParam (int type) {
-		parametre.add(type);
-	}
-
-	public int taille (){
-		return (parametre.size() * 2 );
+	/**
+	 * @return le nombre de parametre de la fonction
+	 */
+	public int getTaille() {
+		return parametre.size();
 	}
 	
+	/**
+	 * @return le nom de la fonction
+	 */
+	public String getNom() {
+		return nom;
+	}
+	
+	/**
+	 * @param index
+	 * @return le type du parametre numero index
+	 */
 	public int getParam(int index){
 		if (index >= parametre.size()) {
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : Le nombre d'arguments de la fonction " + nom + " doit etre egal a " + parametre.size());
@@ -36,19 +57,22 @@ public class IdFonction extends Ident implements YakaConstants{
 		return parametre.get(index);
 	}
 	
-	public int getTaille() {
-		return parametre.size();
+	/**
+	 * Cette methode permet d'ajouter un parametre a la liste des parametres
+	 * @param type
+	 */
+	public void addParam (int type) {
+		parametre.add(type);
 	}
-	
-	public String getNom() {
-		return nom;
+
+	/**
+	 * @return le nombre de parametre * 2
+	 */
+	public int taille (){
+		return (parametre.size() * 2 );
 	}
 
 	public String toString() {
 		return ("resultat : " + resultat + "/parametres : " + parametre);
-	}
-	
-	public void yvm() {
-		Yaka.yvm.call(nom);
 	}
 }

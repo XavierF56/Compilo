@@ -175,8 +175,7 @@ void analyse() : {}
 
 void bloc() : {}{
  (declConst())*
- (declVar())* {yvm.ouvreBloc(Ident.getCompteur()*2);}
- //{yvm.ouvrePrinc(- IdVar.getPrinc());} 
+ (declVar())* {yvm.ouvreBloc(IdVar.getCompteur()*2);}
   suiteInstr() 
 }
 
@@ -374,7 +373,6 @@ void valeur () : {}
  	if(finAppelFonction) {
  		finAppelFonction = false;
  		Yaka.yvm.call(expression.getNomFonction());
- 		//tabIdent.chercheIdentGlob(expression.getNomFonction()).yvm();
  	} else {
  		expression.empiler(tabIdent.chercheIdent(YakaTokenManager.identLu).getType()); 
  		tabIdent.chercheIdent(YakaTokenManager.identLu).yvm();

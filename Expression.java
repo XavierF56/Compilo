@@ -306,7 +306,6 @@ public class Expression implements YakaConstants {
 	/**
 	 * @return le nom de la fonction courante
 	 */
-	
 	public String getNomFonction() {
 			IdFonction fonction = pileFonctions.pop(); 
 			if (fonction!=null)
