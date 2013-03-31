@@ -32,8 +32,6 @@ public class Yaka implements YakaConstants {
     try {
       analyseur = new Yaka(input);
       analyseur.analyse();
-      if (erreur) {}
-      //System.out.println("analyse syntaxique terminee!");
     } catch (ParseException e) {
       String msg = e.getMessage();
       msg = msg.substring(0,msg.indexOf("\u005cn"));

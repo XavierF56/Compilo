@@ -1,4 +1,4 @@
-public class Ident {
+public class Ident implements YakaConstants {
 	protected int offset = 0;
 	protected int type;	
 	
@@ -24,6 +24,7 @@ public class Ident {
 	 * @param affecte
 	 */
 	public void setAffecte(boolean affecte) {
+		if (Yaka.tabIdent.chercheIdent(YakaTokenManager.identLu).getType() != ERREUR)
 		System.out.println("ERREUR ligne " + Yaka.ligne + " : '" + YakaTokenManager.identLu + "' n'est pas une variable");
 	}
 }

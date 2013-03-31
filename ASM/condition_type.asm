@@ -46,11 +46,6 @@ sub ax,bx
 push ax
 
 
-;istore -6
-pop ax 
-mov word ptr [bp-6], ax
-
-
 ;iload -2
 push word ptr [bp-2]
 
@@ -180,3 +175,17 @@ jmp FSI2
 
 
 SINON2:
+
+
+;iload -6
+push word ptr [bp-6]
+
+
+;ecrireEnt
+call ecrent
+
+
+;queue
+nop
+EXITCODE
+end

@@ -1,10 +1,12 @@
 PROGRAMME max2
 
 PRINCIPAL
+	CONST z = 0;
 	VAR ENTIER i,j,k;
+
 	i = 5;
 	j = 10;
-	k = -1;
+	z = -1;
 	
 	SI i>k ALORS
 		SI k>10 ALORS
@@ -15,7 +17,7 @@ PRINCIPAL
 		SI k*k*i ALORS
 			k = 42
 		FSI
-	FSI
+	FSI;
 	ECRIRE(k)
 FPRINCIPAL
 
