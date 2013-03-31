@@ -226,8 +226,8 @@ public class Expression implements YakaConstants {
 	 */
 	public void clotureIterationCondition() {
 		int last = pileOperandes.pop();
-		if (last == ERREUR){
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : expression incorrecte");
+		if (last != BOOLEEN){
+			System.out.println("ERREUR ligne " + Yaka.ligne + " : la condition ne renvoit pas un booleen");
 		}
 	}
 

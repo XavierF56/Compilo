@@ -10,20 +10,20 @@ extrn ecrch:proc, ligsuiv:proc
 max: 
 
 
-;ouvbloc 12
-enter 12,0
+;ouvbloc 6
+enter 6,0
 
 ;iload 6
 push word ptr [bp+6]
 
 
-;istore -10
+;istore -6
 pop ax 
-mov word ptr [bp-10], ax
+mov word ptr [bp-6], ax
 
 
-;iload -10
-push word ptr [bp-10]
+;iload -6
+push word ptr [bp-6]
 
 
 ;iload 4
@@ -46,8 +46,8 @@ cmp ax,0
 je SINON1
 
 
-;iload -10
-push word ptr [bp-10]
+;iload -6
+push word ptr [bp-6]
 
 
 ;ireturn 8
@@ -177,8 +177,8 @@ STARTUPCODE
 
 main:
 
-;ouvbloc 10
-enter 10,0
+;ouvbloc 8
+enter 8,0
 
 ;iconst 5
 push word ptr 5
@@ -203,30 +203,8 @@ call ligsuiv
 sub sp,2
 
 
-;iconst 3
-push word ptr 3
-
-
-;iconst 4
-push word ptr 4
-
-
-;call sup
-call sup
-
-
-;iffaux SINON3
-pop ax
-cmp ax,0
-je SINON3
-
-
-;reserveRetour
-sub sp,2
-
-
-;iload -8
-push word ptr [bp-8]
+;iload -2
+push word ptr [bp-2]
 
 
 ;reserveRetour
@@ -263,13 +241,6 @@ push ax
 ;istore -6
 pop ax 
 mov word ptr [bp-6], ax
-
-
-;goto FSI3
-jmp FSI3
-
-
-SINON3:
 
 
 ;reserveRetour
@@ -314,51 +285,25 @@ add ax,bx
 push ax
 
 
-;reserveRetour
-sub sp,2
-
-
-;iload -2
-push word ptr [bp-2]
-
-
-;iconst 2
-push word ptr 2
-
-
-;imul
-pop bx 
-pop ax 
-imul bx
-push ax
-
-
-;iload -4
-push word ptr [bp-4]
-
-
-;call min
-call min
+;iconst -1
+push word ptr -1
 
 
 ;call sup
 call sup
 
 
-;istore -10
+;istore -8
 pop ax 
-mov word ptr [bp-10], ax
-
-
-FSI3:
+mov word ptr [bp-8], ax
 
 
 ;aLaLigne
 call ligsuiv
 
 
-;iload -8
-push word ptr [bp-8]
+;iload -6
+push word ptr [bp-6]
 
 
 ;ecrireEnt
@@ -369,8 +314,8 @@ call ecrent
 call ligsuiv
 
 
-;iload -10
-push word ptr [bp-10]
+;iload -8
+push word ptr [bp-8]
 
 
 ;ecrireBool

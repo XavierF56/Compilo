@@ -23,7 +23,7 @@ i=5;
 LIRE(j);
 ALALIGNE;
 SI sup(3,4) ALORS 
-k=max (zz,min(j,5))+2;
+k=max (sup(3,4),min(j,5))+2;
 SINON
 b=sup (1+max(i,j-5), min(i*2,j));
 FSI;
