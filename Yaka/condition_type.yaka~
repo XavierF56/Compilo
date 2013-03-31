@@ -11,12 +11,11 @@ PRINCIPAL
 			i = 0;
 		SINON 
 			i = 10;
-		FSI;
+		FSI
 		SI k*k*i ALORS
-			k = 42;
-		SINON
-		FSI;
-	FSI;
+			k = 42
+		FSI
+	FSI
 	ECRIRE(k)
 FPRINCIPAL
 

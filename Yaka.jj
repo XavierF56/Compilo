@@ -426,6 +426,6 @@ void conditionnelle() : {}
 {
 	<SI> expression() {yvm.alors(); expression.clotureIterationCondition();}
 	<ALORS> (suiteInstr() )* {yvm.goToCond();yvm.sinon();}
-	<SINON> (suiteInstr())* {yvm.fsi();}
+	(<SINON> (suiteInstr())* {yvm.fsi();})?
 	<FSI>
 }

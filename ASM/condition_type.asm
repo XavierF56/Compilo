@@ -175,28 +175,8 @@ jmp FSI2
 SINON2:
 
 
-FSI2:
+;goto FSI2
+jmp FSI2
 
 
-;goto FSI3
-jmp FSI3
-
-
-SINON3:
-
-
-FSI3:
-
-
-;iload -6
-push word ptr [bp-6]
-
-
-;ecrireEnt
-call ecrent
-
-
-;queue
-nop
-EXITCODE
-end
+SINON2:

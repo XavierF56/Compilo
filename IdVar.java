@@ -47,7 +47,7 @@ public class IdVar extends Ident {
 	 */
 	public void yvm() {
 		if (!affecte) {
-			System.out.println("ERREUR ligne " + Yaka.ligne + " : une des variables utilisee dans l'expression n'a pas ete initialisee");
+			System.out.println("ATTENTION ligne " + Yaka.ligne + " : une des variables utilisee dans l'expression n'a pas ete initialisee");
 		}
 		Yaka.yvm.iload(offset);
 	}
