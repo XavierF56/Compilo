@@ -6,7 +6,6 @@ public class Yaka implements YakaConstants {
         public static String fichier;
         public static YVM yvm ;
         public static int ligne = 1;
-        public static boolean erreur = false;
         public static boolean finAppelFonction = false;
 
 

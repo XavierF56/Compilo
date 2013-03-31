@@ -178,11 +178,9 @@ public class Expression implements YakaConstants {
 
 		if (last == ERREUR){
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : expression incorrecte");
-			Yaka.erreur = true;
 		}else if (typeAffectation > 0) {
 			if(!(typeAffectation == last)){
 				System.out.println("ERREUR ligne " + Yaka.ligne + " : lors de l'affectation");
-				Yaka.erreur = true;
 			}else{
 				Yaka.yvm.istore(offsetAffectation);
 			}

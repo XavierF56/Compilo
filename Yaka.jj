@@ -28,7 +28,6 @@ public class Yaka{
 	public static String fichier;
 	public static YVM yvm ;
 	public static int ligne = 1;
-	public static boolean erreur = false;
 	public static boolean finAppelFonction = false;
 
 
@@ -55,8 +54,6 @@ public class Yaka{
     try {
       analyseur = new Yaka(input);
       analyseur.analyse();
-      if (erreur) {}
-      //System.out.println("analyse syntaxique terminee!");
     } catch (ParseException e) {
       String msg = e.getMessage();
       msg = msg.substring(0,msg.indexOf("\n"));
