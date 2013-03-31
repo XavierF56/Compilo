@@ -707,12 +707,12 @@ public class Yaka implements YakaConstants {
         }
         suiteInstr();
       }
-                                  yvm.fsi();
       break;
     default:
       jj_la1[30] = jj_gen;
       ;
     }
+                                     yvm.fsi();
     jj_consume_token(FSI);
   }
 

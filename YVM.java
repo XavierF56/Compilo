@@ -5,8 +5,10 @@ public class YVM implements YakaConstants{
    
    OutputStream file;
    private Stack<Integer> stop = new Stack<Integer>();
-   protected static int index = 1; 
-   protected static int indexCondi = 1;
+   protected Stack<Integer> indexIt = new Stack<Integer>();
+   protected int indexItNext = 1; 
+   protected Stack<Integer> indexCondi = new Stack<Integer>();
+   protected int indexCondiNext = 1; 
 
    
    public YVM (String nomFichier){
@@ -194,35 +196,39 @@ public class YVM implements YakaConstants{
 	
 	/** Iteration **/
 	public void tantQue() {
-		Ecriture.ecrireString(file, "FAIRE"+index+":\n");
+		indexIt.push(indexItNext);
+		indexItNext++;
+		Ecriture.ecrireString(file, "FAIRE"+indexIt.peek()+":\n");
 	}
 	public void faire() {
-		Ecriture.ecrireString(file, "iffaux FAIT"+index+"\n");
+		Ecriture.ecrireString(file, "iffaux FAIT"+indexIt.peek()+"\n");
 	}
 	public void goTo() {
-		 Ecriture.ecrireString(file, "goto FAIRE"+index+"\n");
+		 Ecriture.ecrireString(file, "goto FAIRE"+indexIt.peek()+"\n");
 	}
 	public void fait() {
-		 Ecriture.ecrireString(file, "FAIT"+index+":\n");
-		 index++;
+		 Ecriture.ecrireString(file, "FAIT"+indexIt.peek()+":\n");
+		 indexIt.pop();
 	}
 	
 	/** Conditionnelle **/
 	public void alors() {
-		Ecriture.ecrireString(file, "iffaux SINON"+indexCondi+"\n");
+		indexCondi.push(indexCondiNext);
+		indexCondiNext++;
+		Ecriture.ecrireString(file, "iffaux SINON"+indexCondi.peek()+"\n");
 	}
 	
 	public void goToCond() {
-		Ecriture.ecrireString(file, "goto FSI"+indexCondi+"\n");
+		Ecriture.ecrireString(file, "goto FSI"+indexCondi.peek()+"\n");
 	}
 	
 	public void sinon() {
-		Ecriture.ecrireString(file, "SINON"+indexCondi+":\n");
+		Ecriture.ecrireString(file, "SINON"+indexCondi.peek()+":\n");
 	}
 	
 	public void fsi() {
-		Ecriture.ecrireString(file, "FSI"+indexCondi+":\n");
-		indexCondi++;
+		Ecriture.ecrireString(file, "FSI"+indexCondi.peek()+":\n");
+		indexCondi.pop();
 	}
 	
 	/** Fonctions **/

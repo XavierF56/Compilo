@@ -165,7 +165,7 @@ public class YVMasm extends YVM {
 	public void queue(){
 		Ecriture.ecrireString(file,"\n\n;");
 		super.queue();
-		Ecriture.ecrireString(file, "nop\nEXITCODE\nend\n");
+		Ecriture.ecrireString(file, "nop\nEXITCODE\nend debut\n");
 	  }
 
 	public void opNeg() {
@@ -194,46 +194,49 @@ public class YVMasm extends YVM {
 	
 	/** Iteration **/
 	public void tantQue() {
+		indexIt.push(indexItNext);
+		indexItNext++;
 		Ecriture.ecrireString(file,"\n\n");
-		Ecriture.ecrireString(file, "FAIRE"+index+":\n");
+		Ecriture.ecrireString(file, "FAIRE"+indexIt.peek()+":\n");
 	}
 	public void faire() {
 		Ecriture.ecrireString(file,"\n\n;");
 		super.faire();
-		Ecriture.ecrireString(file, "pop ax\ncmp ax,0\nje FAIT" +super.index + "\n");
+		Ecriture.ecrireString(file, "pop ax\ncmp ax,0\nje FAIT" + indexIt.peek() + "\n");
 	}
 	public void goTo() {
 		Ecriture.ecrireString(file,"\n\n;");
 		super.goTo();
-		Ecriture.ecrireString(file, "jmp FAIRE"+index+"\n");
+		Ecriture.ecrireString(file, "jmp FAIRE"+indexIt.peek()+"\n");
 	}
 	public void fait() {
 		Ecriture.ecrireString(file,"\n\n");
-		Ecriture.ecrireString(file, "FAIT"+index+":\n");
+		Ecriture.ecrireString(file, "FAIT"+indexIt.peek()+":\n");
+		indexIt.pop();
 	}
 
 	/** Conditionnelle **/
 	public void alors() {
 		Ecriture.ecrireString(file,"\n\n;");
 		super.alors();
-		Ecriture.ecrireString(file, "pop ax\ncmp ax,0\nje SINON"+indexCondi+"\n");
+		Ecriture.ecrireString(file, "pop ax\ncmp ax,0\nje SINON"+indexCondi.peek()+"\n");
 	}
 	
 	public void goToCond() {
 		Ecriture.ecrireString(file,"\n\n;");
 		super.goToCond();
-		Ecriture.ecrireString(file, "jmp FSI"+indexCondi+"\n");
+		Ecriture.ecrireString(file, "jmp FSI"+indexCondi.peek()+"\n");
 	}
 	
 	public void sinon() {
 		Ecriture.ecrireString(file,"\n\n");
-		Ecriture.ecrireString(file, "SINON"+indexCondi+":\n");
+		Ecriture.ecrireString(file, "SINON"+indexCondi.peek()+":\n");
 	}
 	
 	public void fsi() {
 		Ecriture.ecrireString(file,"\n\n");
-		Ecriture.ecrireString(file, "FSI"+indexCondi+":\n");
-		indexCondi++;
+		Ecriture.ecrireString(file, "FSI"+indexCondi.peek()+":\n");
+		indexCondi.pop();
 	}
 	
 	
