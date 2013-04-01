@@ -46,6 +46,11 @@ sub ax,bx
 push ax
 
 
+;istore -6
+pop ax 
+mov word ptr [bp-6], ax
+
+
 ;iload -2
 push word ptr [bp-2]
 
@@ -88,10 +93,10 @@ jmp $+4
 push 0 
 
 
-;iffaux SINON1
+;iffaux SINON2
 pop ax
 cmp ax,0
-je SINON1
+je SINON2
 
 
 ;iconst 0
@@ -103,11 +108,11 @@ pop ax
 mov word ptr [bp-2], ax
 
 
-;goto FSI1
-jmp FSI1
+;goto FSI2
+jmp FSI2
 
 
-SINON1:
+SINON2:
 
 
 ;iconst 10
@@ -119,7 +124,7 @@ pop ax
 mov word ptr [bp-2], ax
 
 
-FSI1:
+FSI2:
 
 
 ;iload -6
@@ -148,10 +153,10 @@ imul bx
 push ax
 
 
-;iffaux SINON2
+;iffaux SINON3
 pop ax
 cmp ax,0
-je SINON2
+je SINON3
 
 
 ;iconst 42
@@ -163,18 +168,24 @@ pop ax
 mov word ptr [bp-6], ax
 
 
-;goto FSI2
-jmp FSI2
+;goto FSI3
+jmp FSI3
 
 
-SINON2:
+SINON3:
 
 
-;goto FSI2
-jmp FSI2
+FSI3:
 
 
-SINON2:
+;goto FSI1
+jmp FSI1
+
+
+SINON1:
+
+
+FSI1:
 
 
 ;iload -6
@@ -188,4 +199,4 @@ call ecrent
 ;queue
 nop
 EXITCODE
-end
+end debut

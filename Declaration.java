@@ -90,7 +90,6 @@ public class Declaration implements YakaConstants{
 		Yaka.tabIdent.rangeIdent(nom, new IdConst(type, valeur));
 	}
 	
-	
 	/**
 	 * Methode qui rajoute un IdentVar a tabIdent
 	 * @param aucun

@@ -7,15 +7,14 @@ j=1;
 TANTQUE i<=n
 FAIRE
 i=i+1;
-	TANTQUE j<=n
-	FAIRE
-	j=j+1;
-	FAIT;
-
-	TANTQUE j+n
-	FAIRE
-	j=j+1;
-	FAIT
+TANTQUE j<=n
+FAIRE
+j=j+1;
+FAIT;
+TANTQUE j+n
+FAIRE
+j=j+1;
+FAIT
 FAIT
 FPRINCIPAL
 FPROGRAMME

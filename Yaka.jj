@@ -313,8 +313,6 @@ void ecriture() :{}
 }
 
 
-
-
 /********************* Expression ************************/
 void expression() : {}
 {

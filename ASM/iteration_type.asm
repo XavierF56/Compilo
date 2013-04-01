@@ -91,7 +91,7 @@ pop ax
 mov word ptr [bp-2], ax
 
 
-FAIRE1:
+FAIRE2:
 
 
 ;iload -4
@@ -112,10 +112,10 @@ jmp $+4
 push 0 
 
 
-;iffaux FAIT1
+;iffaux FAIT2
 pop ax
 cmp ax,0
-je FAIT1
+je FAIT2
 
 
 ;iload -4
@@ -138,14 +138,14 @@ pop ax
 mov word ptr [bp-4], ax
 
 
-;goto FAIRE1
-jmp FAIRE1
+;goto FAIRE2
+jmp FAIRE2
 
 
-FAIT1:
+FAIT2:
 
 
-FAIRE1:
+FAIRE3:
 
 
 ;iload -4
@@ -163,10 +163,10 @@ add ax,bx
 push ax
 
 
-;iffaux FAIT1
+;iffaux FAIT3
 pop ax
 cmp ax,0
-je FAIT1
+je FAIT3
 
 
 ;iload -4
@@ -189,11 +189,11 @@ pop ax
 mov word ptr [bp-4], ax
 
 
-;goto FAIRE1
-jmp FAIRE1
+;goto FAIRE3
+jmp FAIRE3
 
 
-FAIT1:
+FAIT3:
 
 
 ;goto FAIRE1
@@ -206,4 +206,4 @@ FAIT1:
 ;queue
 nop
 EXITCODE
-end
+end debut

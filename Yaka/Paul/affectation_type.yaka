@@ -3,6 +3,6 @@ PRINCIPAL
 VAR ENTIER x,y;
 VAR BOOLEEN z;
 x=y+3*y-4;
-z=(x/2)/5;
+z=(x+y/2)/5;
 FPRINCIPAL
 FPROGRAMME
