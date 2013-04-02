@@ -4,6 +4,7 @@ public class IdFonction extends Ident implements YakaConstants{
 	private String nom = "";
 	private int resultat;
 	private ArrayList<Integer> parametre = new ArrayList<Integer>();
+	private boolean redefini;
 	
 	/**
 	 * Constructeur d'un IdFonction
@@ -14,6 +15,7 @@ public class IdFonction extends Ident implements YakaConstants{
 		super();
 		this.nom = nom;
 		this.resultat = type;
+		this.redefini = false;
 	}
 	
 	/**
@@ -62,7 +64,8 @@ public class IdFonction extends Ident implements YakaConstants{
 	 * @param type
 	 */
 	public void addParam (int type) {
-		parametre.add(type);
+		if(!redefini)
+			parametre.add(type);
 	}
 
 	/**
@@ -70,6 +73,13 @@ public class IdFonction extends Ident implements YakaConstants{
 	 */
 	public int taille (){
 		return (parametre.size() * 2 );
+	}
+
+	/**
+	 * Modifie la valeur du booleen redefini qui permet de savoir si cette fonction a deja ete definie
+	 */
+	public void setRedefini(boolean b) {
+		redefini = b;
 	}
 
 	public String toString() {

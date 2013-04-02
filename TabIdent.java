@@ -66,7 +66,7 @@ public class TabIdent implements YakaConstants{
 	}
 	
 	/**
-	 * Range un IdFonction dans les locaux
+	 * Range un IdFonction dans les globaux
 	 * @param la clef
 	 * @param l'id
 	 */
@@ -74,6 +74,7 @@ public class TabIdent implements YakaConstants{
 	{
 		if (globaux.containsKey(clef)) {
 			System.out.println("ERREUR ligne " + Yaka.ligne + " : la fonction '" + clef + "' est deja declaree");
+			globaux.get(clef).setRedefini(true);
 		} else {
 			globaux.put(clef,id);
 		}
